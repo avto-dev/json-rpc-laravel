@@ -132,7 +132,7 @@ class RequestFactoryTest extends AbstractUnitTestCase
         $this->assertSame(HttpResponse::HTTP_OK, $response->getStatusCode());
         $this->assertSame('application/json', $response->headers->get('Content-Type'));
 
-        $this->assertIsString($response->getContent(), '');
+        $this->assertInternalType('string', $response->getContent(), '');
         $this->assertEmpty($response->getContent(), '');
     }
 

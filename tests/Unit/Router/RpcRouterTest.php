@@ -11,7 +11,7 @@ use AvtoDev\JsonRpc\Tests\Unit\AbstractUnitTestCase;
 /**
  * @group  rpc
  *
- * @covers \AvtoDev\JsonRpc\Router\Facade<extended>
+ * @covers \AvtoDev\JsonRpc\RpcRouter<extended>
  */
 class RpcRouterTest extends AbstractUnitTestCase
 {
