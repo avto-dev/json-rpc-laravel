@@ -48,19 +48,6 @@ class KernelTest extends AbstractTestCase
     }
 
     /**
-     * For event testing we should call this method after `$this->expectsEvents` calling.
-     *
-     * @link https://stackoverflow.com/a/37840188/2252921
-     *
-     * @return void
-     */
-    private function setUpProperties(): void
-    {
-        $this->kernel = $this->app->make(Kernel::class);
-        $this->router = $this->app->make(RouterInterface::class);
-    }
-
-    /**
      * @return void
      */
     public function testInterfaces(): void
@@ -279,5 +266,18 @@ class KernelTest extends AbstractTestCase
         $last = $responses->all()[1];
         $this->assertInstanceOf(SuccessResponse::class, $last);
         $this->assertNull($last->getResult());
+    }
+
+    /**
+     * For event testing we should call this method after `$this->expectsEvents` calling.
+     *
+     * @link https://stackoverflow.com/a/37840188/2252921
+     *
+     * @return void
+     */
+    private function setUpProperties(): void
+    {
+        $this->kernel = $this->app->make(Kernel::class);
+        $this->router = $this->app->make(RouterInterface::class);
     }
 }
