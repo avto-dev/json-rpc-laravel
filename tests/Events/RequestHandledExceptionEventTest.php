@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AvtoDev\JsonRpc\Tests\Events;
 
+use Illuminate\Support\Str;
 use AvtoDev\JsonRpc\Requests\Request;
 use AvtoDev\JsonRpc\Errors\InternalError;
 use AvtoDev\JsonRpc\Tests\AbstractTestCase;
@@ -20,11 +21,7 @@ class RequestHandledExceptionEventTest extends AbstractTestCase
     public function testConstructor(): void
     {
         $event = new RequestHandledExceptionEvent(
-            $request = new Request(
-                $id = $this->faker()->uuid,
-                $method = $this->faker()->word,
-                $params = $this->faker()->randomElements()
-            ),
+            $request = new Request(Str::random(), Str::random(), []),
             $error = new InternalError
         );
 

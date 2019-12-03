@@ -7,12 +7,9 @@ namespace AvtoDev\JsonRpc\Tests;
 use AvtoDev\JsonRpc\ServiceProvider;
 use Illuminate\Contracts\Console\Kernel;
 use Illuminate\Foundation\Testing\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
 
 abstract class AbstractTestCase extends TestCase
 {
-    use WithFaker;
-
     /**
      * Creates the application.
      *
