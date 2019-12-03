@@ -4,13 +4,13 @@ declare(strict_types = 1);
 
 namespace AvtoDev\JsonRpc\Tests\Unit\Responses;
 
-use Illuminate\Support\Str;
+use AvtoDev\JsonRpc\Errors\MethodNotFoundError;
 use AvtoDev\JsonRpc\Responses\ErrorResponse;
 use AvtoDev\JsonRpc\Responses\ResponsesStack;
-use AvtoDev\JsonRpc\Responses\SuccessResponse;
-use AvtoDev\JsonRpc\Errors\MethodNotFoundError;
-use AvtoDev\JsonRpc\Tests\Unit\AbstractUnitTestCase;
 use AvtoDev\JsonRpc\Responses\ResponsesStackInterface;
+use AvtoDev\JsonRpc\Responses\SuccessResponse;
+use AvtoDev\JsonRpc\Tests\Unit\AbstractUnitTestCase;
+use Illuminate\Support\Str;
 
 /**
  * @group  rpc

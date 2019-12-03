@@ -4,12 +4,12 @@ declare(strict_types = 1);
 
 namespace AvtoDev\JsonRpc\Tests\Unit\Requests;
 
-use stdClass;
-use Illuminate\Support\Str;
-use InvalidArgumentException;
 use AvtoDev\JsonRpc\Requests\Request;
 use AvtoDev\JsonRpc\Requests\RequestInterface;
 use AvtoDev\JsonRpc\Tests\Unit\AbstractUnitTestCase;
+use Illuminate\Support\Str;
+use InvalidArgumentException;
+use stdClass;
 
 /**
  * @group  rpc

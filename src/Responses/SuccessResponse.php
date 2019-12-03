@@ -4,8 +4,8 @@ declare(strict_types = 1);
 
 namespace AvtoDev\JsonRpc\Responses;
 
-use InvalidArgumentException;
 use AvtoDev\JsonRpc\Traits\ValidateNonStrictValuesTrait;
+use InvalidArgumentException;
 
 class SuccessResponse implements SuccessResponseInterface
 {

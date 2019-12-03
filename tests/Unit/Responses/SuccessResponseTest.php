@@ -4,11 +4,11 @@ declare(strict_types = 1);
 
 namespace AvtoDev\JsonRpc\Tests\Unit\Responses;
 
+use AvtoDev\JsonRpc\Responses\SuccessResponse;
+use AvtoDev\JsonRpc\Responses\SuccessResponseInterface;
+use AvtoDev\JsonRpc\Tests\Unit\AbstractUnitTestCase;
 use Illuminate\Support\Str;
 use InvalidArgumentException;
-use AvtoDev\JsonRpc\Responses\SuccessResponse;
-use AvtoDev\JsonRpc\Tests\Unit\AbstractUnitTestCase;
-use AvtoDev\JsonRpc\Responses\SuccessResponseInterface;
 
 /**
  * @group  rpc

@@ -4,8 +4,8 @@ declare(strict_types = 1);
 
 namespace AvtoDev\JsonRpc\Tests\Traits;
 
-use Faker\Generator as FakerGenerator;
 use AvtoDev\FakerProviders\ExtendedFaker;
+use Faker\Generator as FakerGenerator;
 use Illuminate\Contracts\Foundation\Application;
 
 /**

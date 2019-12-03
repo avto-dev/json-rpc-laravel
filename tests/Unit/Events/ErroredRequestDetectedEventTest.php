@@ -4,13 +4,13 @@ declare(strict_types = 1);
 
 namespace AvtoDev\JsonRpc\Tests\Unit\Events;
 
-use Illuminate\Support\Str;
 use AvtoDev\JsonRpc\Errors\ErrorInterface;
-use AvtoDev\JsonRpc\Tests\AbstractTestCase;
-use AvtoDev\JsonRpc\Requests\ErroredRequest;
 use AvtoDev\JsonRpc\Errors\InvalidParamsError;
-use AvtoDev\JsonRpc\Requests\ErroredRequestInterface;
 use AvtoDev\JsonRpc\Events\ErroredRequestDetectedEvent;
+use AvtoDev\JsonRpc\Requests\ErroredRequest;
+use AvtoDev\JsonRpc\Requests\ErroredRequestInterface;
+use AvtoDev\JsonRpc\Tests\AbstractTestCase;
+use Illuminate\Support\Str;
 
 /**
  * @covers \AvtoDev\JsonRpc\Events\ErroredRequestDetectedEvent<extended>

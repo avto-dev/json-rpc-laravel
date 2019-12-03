@@ -4,12 +4,12 @@ declare(strict_types = 1);
 
 namespace AvtoDev\JsonRpc\Tests\Unit\Avtodev\JsonRpc;
 
-use AvtoDev\JsonRpc\Kernel;
-use AvtoDev\JsonRpc\Router\Router;
-use AvtoDev\JsonRpc\KernelInterface;
-use AvtoDev\JsonRpc\Router\RouterInterface;
-use AvtoDev\JsonRpc\Factories\RequestFactory;
 use AvtoDev\JsonRpc\Factories\FactoryInterface;
+use AvtoDev\JsonRpc\Factories\RequestFactory;
+use AvtoDev\JsonRpc\Kernel;
+use AvtoDev\JsonRpc\KernelInterface;
+use AvtoDev\JsonRpc\Router\Router;
+use AvtoDev\JsonRpc\Router\RouterInterface;
 use AvtoDev\JsonRpc\Tests\Unit\AbstractUnitTestCase;
 
 /**

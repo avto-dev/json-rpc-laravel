@@ -4,13 +4,13 @@ declare(strict_types = 1);
 
 namespace AvtoDev\JsonRpc\Tests;
 
-use Dotenv\Dotenv;
 use AvtoDev\JsonRpc\ServiceProvider;
-use Illuminate\Foundation\Application;
-use Illuminate\Contracts\Console\Kernel;
 use AvtoDev\JsonRpc\Tests\Traits\WithFaker;
-use Illuminate\Foundation\Testing\TestCase;
+use Dotenv\Dotenv;
 use Illuminate\Config\Repository as ConfigRepository;
+use Illuminate\Contracts\Console\Kernel;
+use Illuminate\Foundation\Application;
+use Illuminate\Foundation\Testing\TestCase;
 
 abstract class AbstractTestCase extends TestCase
 {

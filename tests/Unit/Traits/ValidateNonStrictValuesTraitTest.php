@@ -4,10 +4,10 @@ declare(strict_types = 1);
 
 namespace AvtoDev\JsonRpc\Tests\Unit\Traits;
 
-use Illuminate\Support\Str;
-use InvalidArgumentException;
 use AvtoDev\JsonRpc\Tests\Unit\AbstractUnitTestCase;
 use AvtoDev\JsonRpc\Traits\ValidateNonStrictValuesTrait;
+use Illuminate\Support\Str;
+use InvalidArgumentException;
 
 /**
  * @group  rpc

@@ -4,14 +4,14 @@ declare(strict_types = 1);
 
 namespace AvtoDev\JsonRpc\Tests\Unit\Factories;
 
-use AvtoDev\JsonRpc\Kernel;
-use Tarampampam\Wrappers\Json;
 use AvtoDev\JsonRpc\Errors\ErrorInterface;
-use AvtoDev\JsonRpc\Router\RouterInterface;
-use AvtoDev\JsonRpc\Responses\ErrorResponse;
 use AvtoDev\JsonRpc\Factories\FactoryInterface;
-use AvtoDev\JsonRpc\Tests\Unit\AbstractUnitTestCase;
+use AvtoDev\JsonRpc\Kernel;
 use AvtoDev\JsonRpc\MethodParameters\BaseMethodParameters;
+use AvtoDev\JsonRpc\Responses\ErrorResponse;
+use AvtoDev\JsonRpc\Router\RouterInterface;
+use AvtoDev\JsonRpc\Tests\Unit\AbstractUnitTestCase;
+use Tarampampam\Wrappers\Json;
 
 /**
  * @group rpc
@@ -182,7 +182,7 @@ class JsonRpcFollowsSpecificationTest extends AbstractUnitTestCase
      */
     public function testRpcCallBatchInvalidJSON(): void
     {
-        $input = <<<JSON
+        $input = <<<'JSON'
 [
   {"jsonrpc": "2.0", "method": "sum", "params": [1,2,4], "id": "1"},
   {"jsonrpc": "2.0", "method"
@@ -221,7 +221,7 @@ JSON;
     public function testRpcCallWithAnInvalidBatchButNotEmpty(): void
     {
         $input  = '[1]';
-        $output = <<<JSON
+        $output = <<<'JSON'
 [
   {"jsonrpc": "2.0", "error": {"code": -32600, "message": "Invalid Request"}, "id": null}
 ]
@@ -236,7 +236,7 @@ JSON;
     public function testRpcCallWithInvalidBatch(): void
     {
         $input  = '[1,2,3]';
-        $output = <<<JSON
+        $output = <<<'JSON'
 [
   {"jsonrpc": "2.0", "error": {"code": -32600, "message": "Invalid Request"}, "id": null},
   {"jsonrpc": "2.0", "error": {"code": -32600, "message": "Invalid Request"}, "id": null},
@@ -266,7 +266,7 @@ JSON;
             return ['hello', 5];
         });
 
-        $input = <<<JSON
+        $input = <<<'JSON'
 [
     {"jsonrpc": "2.0", "method": "sum", "params": [1,2,4], "id": "1"},
     {"jsonrpc": "2.0", "method": "notify_hello", "params": [7]},
@@ -277,7 +277,7 @@ JSON;
 ]
 JSON;
 
-        $output = <<<JSON
+        $output = <<<'JSON'
 [
     {"jsonrpc": "2.0", "result": 7, "id": "1"},
     {"jsonrpc": "2.0", "result": 19, "id": "2"},
@@ -302,7 +302,7 @@ JSON;
             return true;
         });
 
-        $input = <<<JSON
+        $input = <<<'JSON'
 [
     {"jsonrpc": "2.0", "method": "notify_sum", "params": [1,2,4]},
     {"jsonrpc": "2.0", "method": "notify_hello", "params": [7]}

@@ -4,24 +4,22 @@ declare(strict_types = 1);
 
 namespace AvtoDev\JsonRpc;
 
-use Throwable;
-use AvtoDev\JsonRpc\Errors\InternalError;
 use AvtoDev\JsonRpc\Errors\ErrorInterface;
-use AvtoDev\JsonRpc\Router\RouterInterface;
+use AvtoDev\JsonRpc\Errors\InternalError;
+use AvtoDev\JsonRpc\Errors\MethodNotFoundError;
+use AvtoDev\JsonRpc\Events\ErroredRequestDetectedEvent;
+use AvtoDev\JsonRpc\Events\RequestHandledEvent;
+use AvtoDev\JsonRpc\Events\RequestHandledExceptionEvent;
+use AvtoDev\JsonRpc\Requests\ErroredRequestInterface;
+use AvtoDev\JsonRpc\Requests\RequestInterface;
+use AvtoDev\JsonRpc\Requests\RequestsStackInterface;
 use AvtoDev\JsonRpc\Responses\ErrorResponse;
 use AvtoDev\JsonRpc\Responses\ResponsesStack;
-use AvtoDev\JsonRpc\Requests\RequestInterface;
-use AvtoDev\JsonRpc\Responses\SuccessResponse;
-use AvtoDev\JsonRpc\Errors\MethodNotFoundError;
-use AvtoDev\JsonRpc\Events\RequestHandledEvent;
-use AvtoDev\JsonRpc\Requests\RequestsStackInterface;
-use AvtoDev\JsonRpc\Events\RequestStartHandlingEvent;
-use AvtoDev\JsonRpc\Requests\ErroredRequestInterface;
 use AvtoDev\JsonRpc\Responses\ResponsesStackInterface;
-use AvtoDev\JsonRpc\Events\ErroredRequestDetectedEvent;
-use AvtoDev\JsonRpc\Events\RequestHandledCompleteEvent;
-use AvtoDev\JsonRpc\Events\RequestHandledExceptionEvent;
+use AvtoDev\JsonRpc\Responses\SuccessResponse;
+use AvtoDev\JsonRpc\Router\RouterInterface;
 use Illuminate\Contracts\Events\Dispatcher as EventsDispatcher;
+use Throwable;
 
 class Kernel implements KernelInterface
 {

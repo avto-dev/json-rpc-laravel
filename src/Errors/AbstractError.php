@@ -4,10 +4,10 @@ declare(strict_types = 1);
 
 namespace AvtoDev\JsonRpc\Errors;
 
-use Exception;
-use Throwable;
-use InvalidArgumentException;
 use AvtoDev\JsonRpc\Traits\ValidateNonStrictValuesTrait;
+use Exception;
+use InvalidArgumentException;
+use Throwable;
 
 abstract class AbstractError extends Exception implements ErrorInterface
 {

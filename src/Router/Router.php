@@ -4,11 +4,11 @@ declare(strict_types = 1);
 
 namespace AvtoDev\JsonRpc\Router;
 
-use Closure;
-use InvalidArgumentException;
-use Illuminate\Contracts\Container\Container;
-use AvtoDev\JsonRpc\Requests\RequestInterface as RPCRequest;
 use AvtoDev\JsonRpc\MethodParameters\MethodParametersInterface as ParametersInterface;
+use AvtoDev\JsonRpc\Requests\RequestInterface as RPCRequest;
+use Closure;
+use Illuminate\Contracts\Container\Container;
+use InvalidArgumentException;
 
 class Router implements RouterInterface
 {

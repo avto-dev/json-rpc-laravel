@@ -4,13 +4,13 @@ declare(strict_types = 1);
 
 namespace AvtoDev\JsonRpc\Tests\Unit\Requests;
 
-use Illuminate\Support\Str;
-use InvalidArgumentException;
-use AvtoDev\JsonRpc\Requests\ErroredRequest;
 use AvtoDev\JsonRpc\Errors\InvalidParamsError;
 use AvtoDev\JsonRpc\Errors\InvalidRequestError;
-use AvtoDev\JsonRpc\Tests\Unit\AbstractUnitTestCase;
+use AvtoDev\JsonRpc\Requests\ErroredRequest;
 use AvtoDev\JsonRpc\Requests\ErroredRequestInterface;
+use AvtoDev\JsonRpc\Tests\Unit\AbstractUnitTestCase;
+use Illuminate\Support\Str;
+use InvalidArgumentException;
 
 /**
  * @group  rpc

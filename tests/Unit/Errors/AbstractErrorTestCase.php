@@ -4,10 +4,10 @@ declare(strict_types = 1);
 
 namespace AvtoDev\JsonRpc\Tests\Unit\Errors;
 
-use Exception;
-use Illuminate\Support\Str;
 use AvtoDev\JsonRpc\Errors\ErrorInterface;
 use AvtoDev\JsonRpc\Tests\Unit\AbstractUnitTestCase;
+use Exception;
+use Illuminate\Support\Str;
 
 abstract class AbstractErrorTestCase extends AbstractUnitTestCase
 {

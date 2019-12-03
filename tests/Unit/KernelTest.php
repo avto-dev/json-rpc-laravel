@@ -4,19 +4,19 @@ declare(strict_types = 1);
 
 namespace AvtoDev\JsonRpc\Tests\Unit;
 
-use stdClass;
-use AvtoDev\JsonRpc\Kernel;
-use Illuminate\Support\Str;
-use AvtoDev\JsonRpc\KernelInterface;
-use AvtoDev\JsonRpc\Requests\Request;
 use AvtoDev\JsonRpc\Errors\InternalError;
-use AvtoDev\JsonRpc\Requests\RequestsStack;
-use AvtoDev\JsonRpc\Router\RouterInterface;
+use AvtoDev\JsonRpc\Errors\MethodNotFoundError;
+use AvtoDev\JsonRpc\Kernel;
+use AvtoDev\JsonRpc\KernelInterface;
 use AvtoDev\JsonRpc\Requests\ErroredRequest;
+use AvtoDev\JsonRpc\Requests\Request;
+use AvtoDev\JsonRpc\Requests\RequestsStack;
 use AvtoDev\JsonRpc\Responses\ErrorResponse;
 use AvtoDev\JsonRpc\Responses\SuccessResponse;
-use AvtoDev\JsonRpc\Errors\MethodNotFoundError;
+use AvtoDev\JsonRpc\Router\RouterInterface;
 use AvtoDev\JsonRpc\Tests\Stubs\BaseMethodParametersStub;
+use Illuminate\Support\Str;
+use stdClass;
 
 /**
  * @group  rpc

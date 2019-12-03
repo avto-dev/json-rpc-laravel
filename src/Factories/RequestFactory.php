@@ -4,27 +4,27 @@ declare(strict_types = 1);
 
 namespace AvtoDev\JsonRpc\Factories;
 
-use Throwable;
-use InvalidArgumentException;
-use Tarampampam\Wrappers\Json;
-use AvtoDev\JsonRpc\Requests\Request;
-use AvtoDev\JsonRpc\Errors\ParseError;
-use AvtoDev\JsonRpc\Errors\ServerError;
-use AvtoDev\JsonRpc\Errors\InternalError;
 use AvtoDev\JsonRpc\Errors\ErrorInterface;
-use AvtoDev\JsonRpc\Requests\RequestsStack;
-use AvtoDev\JsonRpc\Requests\ErroredRequest;
+use AvtoDev\JsonRpc\Errors\InternalError;
 use AvtoDev\JsonRpc\Errors\InvalidParamsError;
 use AvtoDev\JsonRpc\Errors\InvalidRequestError;
 use AvtoDev\JsonRpc\Errors\MethodNotFoundError;
-use AvtoDev\JsonRpc\Responses\ResponseInterface;
+use AvtoDev\JsonRpc\Errors\ParseError;
+use AvtoDev\JsonRpc\Errors\ServerError;
+use AvtoDev\JsonRpc\Requests\ErroredRequest;
+use AvtoDev\JsonRpc\Requests\Request;
+use AvtoDev\JsonRpc\Requests\RequestsStack;
 use AvtoDev\JsonRpc\Requests\RequestsStackInterface;
 use AvtoDev\JsonRpc\Responses\ErrorResponseInterface;
+use AvtoDev\JsonRpc\Responses\ResponseInterface;
 use AvtoDev\JsonRpc\Responses\ResponsesStackInterface;
 use AvtoDev\JsonRpc\Responses\SuccessResponseInterface;
 use AvtoDev\JsonRpc\Traits\ValidateNonStrictValuesTrait;
+use InvalidArgumentException;
 use Symfony\Component\HttpFoundation\Response as HttpResponse;
 use Tarampampam\Wrappers\Exceptions\JsonEncodeDecodeException;
+use Tarampampam\Wrappers\Json;
+use Throwable;
 
 class RequestFactory implements FactoryInterface
 {
@@ -37,7 +37,7 @@ class RequestFactory implements FactoryInterface
     {
         $is_batch = \mb_strpos($json_string = \trim($json_string), '[') === 0;
 
-        /**
+        /*
          * rpc call with invalid JSON:
          * --> {"jsonrpc": "2.0", "method": "foobar, "params": "bar", "baz]
          * <-- {"jsonrpc": "2.0", "error": {"code": -32700, "message": "Parse error"}, "id": null}.
@@ -60,7 +60,7 @@ class RequestFactory implements FactoryInterface
             ? $raw_requests
             : [$raw_requests];
 
-        /**
+        /*
          * rpc call with an empty Array:
          * --> []
          * <-- {"jsonrpc": "2.0", "error": {"code": -32600, "message": "Invalid Request"}, "id": null}.
@@ -101,7 +101,7 @@ class RequestFactory implements FactoryInterface
                     $request
                 ));
             } else {
-                /**
+                /*
                  * rpc call with invalid Batch:.
                  *
                  * --> [1,2,3]
@@ -193,7 +193,7 @@ class RequestFactory implements FactoryInterface
      */
     public function responsesToHttpResponse(ResponsesStackInterface $responses, int $options = 0): HttpResponse
     {
-        /**
+        /*
          * --> [
          * {"jsonrpc": "2.0", "method": "notify_sum", "params": [1,2,4]},
          * {"jsonrpc": "2.0", "method": "notify_hello", "params": [7]}

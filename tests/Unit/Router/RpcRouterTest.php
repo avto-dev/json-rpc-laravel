@@ -4,8 +4,8 @@ declare(strict_types = 1);
 
 namespace AvtoDev\JsonRpc\Tests\Unit\Router;
 
-use AvtoDev\JsonRpc\RpcRouter;
 use AvtoDev\JsonRpc\Router\RouterInterface;
+use AvtoDev\JsonRpc\RpcRouter;
 use AvtoDev\JsonRpc\Tests\Unit\AbstractUnitTestCase;
 
 /**
