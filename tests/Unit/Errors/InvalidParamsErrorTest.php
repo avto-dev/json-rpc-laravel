@@ -1,21 +1,17 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace AvtoDev\JsonRpc\Tests\Unit\Errors;
 
 use AvtoDev\JsonRpc\Errors\InvalidParamsError;
 
 /**
- * @group  rpc
- *
  * @covers \AvtoDev\JsonRpc\Errors\InvalidParamsError<extended>
  */
 class InvalidParamsErrorTest extends AbstractErrorTestCase
 {
     /**
-     * @small
-     *
      * @return void
      */
     public function testDefaultMessage(): void

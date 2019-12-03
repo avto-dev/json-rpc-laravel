@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace AvtoDev\JsonRpc\Tests\Unit\Requests;
 
@@ -13,8 +13,6 @@ use AvtoDev\JsonRpc\Tests\Unit\AbstractUnitTestCase;
 use AvtoDev\JsonRpc\Requests\ErroredRequestInterface;
 
 /**
- * @group  rpc
- *
  * @covers \AvtoDev\JsonRpc\Requests\ErroredRequest<extended>
  */
 class ErroredRequestTest extends AbstractUnitTestCase
@@ -25,19 +23,7 @@ class ErroredRequestTest extends AbstractUnitTestCase
     protected $request;
 
     /**
-     * {@inheritdoc}
-     */
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->request = new ErroredRequest(new InvalidParamsError, Str::random());
-    }
-
-    /**
      * @coversNothing
-     *
-     * @small
      *
      * @return void
      */
@@ -47,8 +33,6 @@ class ErroredRequestTest extends AbstractUnitTestCase
     }
 
     /**
-     * @small
-     *
      * @return void
      */
     public function testIdGetter(): void
@@ -59,8 +43,6 @@ class ErroredRequestTest extends AbstractUnitTestCase
     }
 
     /**
-     * @small
-     *
      * @return void
      */
     public function testErrorGetter(): void
@@ -71,8 +53,6 @@ class ErroredRequestTest extends AbstractUnitTestCase
     }
 
     /**
-     * @small
-     *
      * @return void
      */
     public function testInvalidIdPassingIntoConstructor(): void
@@ -88,5 +68,15 @@ class ErroredRequestTest extends AbstractUnitTestCase
 
             $this->assertTrue($catch);
         }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->request = new ErroredRequest(new InvalidParamsError, Str::random());
     }
 }

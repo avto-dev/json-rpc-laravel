@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace AvtoDev\JsonRpc\Tests\Unit\Responses;
 
@@ -13,8 +13,6 @@ use AvtoDev\JsonRpc\Tests\Unit\AbstractUnitTestCase;
 use AvtoDev\JsonRpc\Responses\ResponsesStackInterface;
 
 /**
- * @group  rpc
- *
  * @covers \AvtoDev\JsonRpc\Responses\ResponsesStack<extended>
  */
 class ResponsesStackTest extends AbstractUnitTestCase
@@ -25,18 +23,6 @@ class ResponsesStackTest extends AbstractUnitTestCase
     protected $instance;
 
     /**
-     * {@inheritdoc}
-     */
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->instance = $this->instanceFactory();
-    }
-
-    /**
-     * @small
-     *
      * @return void
      */
     public function testInterface(): void
@@ -92,14 +78,22 @@ class ResponsesStackTest extends AbstractUnitTestCase
     }
 
     /**
-     * @small
-     *
      * @return void
      */
     public function testIsBatch(): void
     {
         $this->assertTrue((new ResponsesStack(true))->isBatch());
         $this->assertFalse((new ResponsesStack(false))->isBatch());
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->instance = $this->instanceFactory();
     }
 
     /**

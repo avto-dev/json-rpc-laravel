@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace AvtoDev\JsonRpc\Tests\Unit\Avtodev\JsonRpc;
 
@@ -28,8 +28,6 @@ class ServiceProviderTest extends AbstractUnitTestCase
     }
 
     /**
-     * @small
-     *
      * @return void
      */
     public function testKernelBindedAsSingleton(): void
@@ -41,8 +39,6 @@ class ServiceProviderTest extends AbstractUnitTestCase
     }
 
     /**
-     * @small
-     *
      * @return void
      */
     public function testRouterBindedAsSingleton(): void

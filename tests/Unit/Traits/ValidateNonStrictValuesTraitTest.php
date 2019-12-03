@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace AvtoDev\JsonRpc\Tests\Unit\Traits;
 
@@ -10,8 +10,6 @@ use AvtoDev\JsonRpc\Tests\Unit\AbstractUnitTestCase;
 use AvtoDev\JsonRpc\Traits\ValidateNonStrictValuesTrait;
 
 /**
- * @group  rpc
- *
  * @covers \AvtoDev\JsonRpc\Traits\ValidateNonStrictValuesTrait<extended>
  */
 class ValidateNonStrictValuesTraitTest extends AbstractUnitTestCase
@@ -19,8 +17,6 @@ class ValidateNonStrictValuesTraitTest extends AbstractUnitTestCase
     use ValidateNonStrictValuesTrait;
 
     /**
-     * @small
-     *
      * @return void
      */
     public function testValidateIdValue(): void
@@ -35,8 +31,6 @@ class ValidateNonStrictValuesTraitTest extends AbstractUnitTestCase
     }
 
     /**
-     * @small
-     *
      * @return void
      */
     public function testValidateIdValueThrowsAnException(): void
@@ -54,8 +48,6 @@ class ValidateNonStrictValuesTraitTest extends AbstractUnitTestCase
     }
 
     /**
-     * @small
-     *
      * @return void
      */
     public function testValidateResultValue(): void
@@ -70,8 +62,6 @@ class ValidateNonStrictValuesTraitTest extends AbstractUnitTestCase
     }
 
     /**
-     * @small
-     *
      * @return void
      */
     public function testValidateResultValueThrowsAnException(): void
@@ -90,8 +80,6 @@ class ValidateNonStrictValuesTraitTest extends AbstractUnitTestCase
     }
 
     /**
-     * @small
-     *
      * @return void
      */
     public function testValidateErrorDataValue(): void
@@ -106,8 +94,6 @@ class ValidateNonStrictValuesTraitTest extends AbstractUnitTestCase
     }
 
     /**
-     * @small
-     *
      * @return void
      */
     public function testValidateErrorDataValueThrowsAnException(): void
@@ -126,8 +112,6 @@ class ValidateNonStrictValuesTraitTest extends AbstractUnitTestCase
     }
 
     /**
-     * @small
-     *
      * @return void
      */
     public function testValidateParamsValue(): void
@@ -142,8 +126,6 @@ class ValidateNonStrictValuesTraitTest extends AbstractUnitTestCase
     }
 
     /**
-     * @small
-     *
      * @return void
      */
     public function testValidateParamsValueThrowsAnException(): void

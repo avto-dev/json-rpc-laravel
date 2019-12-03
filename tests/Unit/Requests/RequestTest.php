@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace AvtoDev\JsonRpc\Tests\Unit\Requests;
 
@@ -12,8 +12,6 @@ use AvtoDev\JsonRpc\Requests\RequestInterface;
 use AvtoDev\JsonRpc\Tests\Unit\AbstractUnitTestCase;
 
 /**
- * @group  rpc
- *
  * @covers \AvtoDev\JsonRpc\Requests\Request<extended>
  */
 class RequestTest extends AbstractUnitTestCase
@@ -24,19 +22,7 @@ class RequestTest extends AbstractUnitTestCase
     protected $request;
 
     /**
-     * {@inheritdoc}
-     */
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->request = new Request(Str::random(), Str::random(), []);
-    }
-
-    /**
      * @coversNothing
-     *
-     * @small
      *
      * @return void
      */
@@ -46,8 +32,6 @@ class RequestTest extends AbstractUnitTestCase
     }
 
     /**
-     * @small
-     *
      * @return void
      */
     public function testIdGetter(): void
@@ -58,8 +42,6 @@ class RequestTest extends AbstractUnitTestCase
     }
 
     /**
-     * @small
-     *
      * @return void
      */
     public function testGetters(): void
@@ -78,8 +60,6 @@ class RequestTest extends AbstractUnitTestCase
     }
 
     /**
-     * @small
-     *
      * @return void
      */
     public function testisNotification(): void
@@ -89,8 +69,6 @@ class RequestTest extends AbstractUnitTestCase
     }
 
     /**
-     * @small
-     *
      * @return void
      */
     public function testInvalidIdPassingIntoConstructor(): void
@@ -109,8 +87,6 @@ class RequestTest extends AbstractUnitTestCase
     }
 
     /**
-     * @small
-     *
      * @return void
      */
     public function testGetParameterByPath(): void
@@ -143,8 +119,6 @@ class RequestTest extends AbstractUnitTestCase
     }
 
     /**
-     * @small
-     *
      * @return void
      */
     public function testGetParameterByPathUsingObject(): void
@@ -177,8 +151,6 @@ class RequestTest extends AbstractUnitTestCase
     }
 
     /**
-     * @small
-     *
      * @return void
      */
     public function testGetParameterByPathUsingCustomDelimiter(): void
@@ -208,8 +180,6 @@ class RequestTest extends AbstractUnitTestCase
     }
 
     /**
-     * @small
-     *
      * @return void
      */
     public function testGetParameterByPathDefault(): void
@@ -225,5 +195,15 @@ class RequestTest extends AbstractUnitTestCase
         $this->assertSame($default = function (): void {
             //
         }, $this->request->getParameterByPath(Str::random(), $default));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->request = new Request(Str::random(), Str::random(), []);
     }
 }

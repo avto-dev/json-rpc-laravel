@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace AvtoDev\JsonRpc\Tests\Unit\Responses;
 
@@ -11,8 +11,6 @@ use AvtoDev\JsonRpc\Tests\Unit\AbstractUnitTestCase;
 use AvtoDev\JsonRpc\Responses\SuccessResponseInterface;
 
 /**
- * @group  rpc
- *
  * @covers \AvtoDev\JsonRpc\Responses\SuccessResponse<extended>
  */
 class SuccessResponseTest extends AbstractUnitTestCase
@@ -23,18 +21,6 @@ class SuccessResponseTest extends AbstractUnitTestCase
     protected $response;
 
     /**
-     * {@inheritdoc}
-     */
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->response = new SuccessResponse(Str::random(), Str::random());
-    }
-
-    /**
-     * @small
-     *
      * @return void
      */
     public function testInterfaces(): void
@@ -43,8 +29,6 @@ class SuccessResponseTest extends AbstractUnitTestCase
     }
 
     /**
-     * @small
-     *
      * @return void
      */
     public function testIdGetter(): void
@@ -55,8 +39,6 @@ class SuccessResponseTest extends AbstractUnitTestCase
     }
 
     /**
-     * @small
-     *
      * @return void
      */
     public function testInvalidIdPassingIntoConstructor(): void
@@ -75,8 +57,6 @@ class SuccessResponseTest extends AbstractUnitTestCase
     }
 
     /**
-     * @small
-     *
      * @return void
      */
     public function testResultGetter(): void
@@ -87,8 +67,6 @@ class SuccessResponseTest extends AbstractUnitTestCase
     }
 
     /**
-     * @small
-     *
      * @return void
      */
     public function testInvalidResultPassingIntoConstructor(): void
@@ -104,5 +82,15 @@ class SuccessResponseTest extends AbstractUnitTestCase
 
             $this->assertTrue($catch);
         }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->response = new SuccessResponse(Str::random(), Str::random());
     }
 }

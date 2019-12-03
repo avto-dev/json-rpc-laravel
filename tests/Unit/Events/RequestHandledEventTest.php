@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace AvtoDev\JsonRpc\Tests\Unit\Events;
 
@@ -25,10 +25,7 @@ class RequestHandledEventTest extends AbstractTestCase
                 $params = $this->faker()->randomElements()
             )
         );
-        $this->assertRegExp('~RPC.*success~', $event->message);
 
-        $this->assertSame($id, $event->getRequest()->getId());
-        $this->assertSame($method, $event->getRequest()->getMethod());
-        $this->assertSame($params, $event->getRequest()->getParams());
+        $this->assertSame($request, $event->request);
     }
 }

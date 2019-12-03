@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace AvtoDev\JsonRpc\Tests\Stubs;
 
@@ -26,14 +26,6 @@ class BaseMethodParametersStub extends BaseMethodParameters
     }
 
     /**
-     * @return string|null
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
      * @param $params
      */
     protected function extractIdParameter($params): void
@@ -45,5 +37,13 @@ class BaseMethodParametersStub extends BaseMethodParameters
         if (\is_array($params) && \is_string($id = $params['id'] ?? null)) {
             $this->id = $id;
         }
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getId()
+    {
+        return $this->id;
     }
 }

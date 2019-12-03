@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace AvtoDev\JsonRpc\Tests\Unit\Events;
 
@@ -27,9 +27,7 @@ class RequestHandledExceptionEventTest extends AbstractTestCase
             ),
             $error = new InternalError
         );
-        $this->assertRegExp('~RPC.*except~', $event->message);
 
-        $this->assertSame($request, $event->getRequest());
-        $this->assertSame($error, $event->getError());
+        $this->assertSame($request, $event->request);
     }
 }

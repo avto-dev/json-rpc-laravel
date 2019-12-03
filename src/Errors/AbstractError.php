@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace AvtoDev\JsonRpc\Errors;
 
@@ -29,10 +29,7 @@ abstract class AbstractError extends Exception implements ErrorInterface
      *
      * @throws InvalidArgumentException If passed wrong data
      */
-    public function __construct(string $message,
-                                int $code = 0,
-                                $data = null,
-                                ?Throwable $exception = null)
+    public function __construct(string $message, int $code = 0, $data = null, ?Throwable $exception = null)
     {
         $this->validateErrorDataValue($data, true);
         $this->data = $data;

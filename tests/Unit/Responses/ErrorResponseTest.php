@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace AvtoDev\JsonRpc\Tests\Unit\Responses;
 
@@ -12,8 +12,6 @@ use AvtoDev\JsonRpc\Tests\Unit\AbstractUnitTestCase;
 use AvtoDev\JsonRpc\Responses\ErrorResponseInterface;
 
 /**
- * @group  rpc
- *
  * @covers \AvtoDev\JsonRpc\Responses\ErrorResponse<extended>
  */
 class ErrorResponseTest extends AbstractUnitTestCase
@@ -21,18 +19,6 @@ class ErrorResponseTest extends AbstractUnitTestCase
     protected $response;
 
     /**
-     * {@inheritdoc}
-     */
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->response = new ErrorResponse(null, new MethodNotFoundError);
-    }
-
-    /**
-     * @small
-     *
      * @return void
      */
     public function testInterfaces(): void
@@ -41,8 +27,6 @@ class ErrorResponseTest extends AbstractUnitTestCase
     }
 
     /**
-     * @small
-     *
      * @return void
      */
     public function testIdGetter(): void
@@ -53,8 +37,6 @@ class ErrorResponseTest extends AbstractUnitTestCase
     }
 
     /**
-     * @small
-     *
      * @return void
      */
     public function testInvalidIdPassingIntoConstructor(): void
@@ -73,8 +55,6 @@ class ErrorResponseTest extends AbstractUnitTestCase
     }
 
     /**
-     * @small
-     *
      * @return void
      */
     public function testErrorGetter(): void
@@ -82,5 +62,15 @@ class ErrorResponseTest extends AbstractUnitTestCase
         $error = new MethodNotFoundError;
 
         $this->assertSame($error, (new ErrorResponse(null, $error))->getError());
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->response = new ErrorResponse(null, new MethodNotFoundError);
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace AvtoDev\JsonRpc\Tests\Unit\MethodParameters;
 
@@ -8,8 +8,6 @@ use AvtoDev\JsonRpc\Tests\Unit\AbstractUnitTestCase;
 use AvtoDev\JsonRpc\MethodParameters\BaseMethodParameters;
 
 /**
- * @group  rpc
- *
  * @covers \AvtoDev\JsonRpc\MethodParameters\BaseMethodParameters<extended>
  */
 class BaseMethodParametersTest extends AbstractUnitTestCase
@@ -26,8 +24,6 @@ class BaseMethodParametersTest extends AbstractUnitTestCase
     }
 
     /**
-     * @small
-     *
      * @return void
      */
     public function testParseNull(): void

@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace AvtoDev\JsonRpc\Events;
 
@@ -10,19 +10,14 @@ use AvtoDev\JsonRpc\Requests\RequestInterface;
 class RequestHandledExceptionEvent
 {
     /**
-     * @var string
-     */
-    public $message = 'RPC request handling exception';
-
-    /**
      * @var RequestInterface
      */
-    protected $request;
+    public $request;
 
     /**
      * @var Throwable
      */
-    protected $error;
+    public $error;
 
     /**
      * @param RequestInterface $request
@@ -32,21 +27,5 @@ class RequestHandledExceptionEvent
     {
         $this->request = $request;
         $this->error   = $error;
-    }
-
-    /**
-     * @return RequestInterface
-     */
-    public function getRequest()
-    {
-        return $this->request;
-    }
-
-    /**
-     * @return Throwable
-     */
-    public function getError()
-    {
-        return $this->error;
     }
 }

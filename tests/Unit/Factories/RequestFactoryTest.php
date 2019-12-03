@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace AvtoDev\JsonRpc\Tests\Unit\Factories;
 
@@ -26,8 +26,6 @@ use AvtoDev\JsonRpc\Tests\Unit\AbstractUnitTestCase;
 use Symfony\Component\HttpFoundation\Response as HttpResponse;
 
 /**
- * @group  rpc
- *
  * @covers \AvtoDev\JsonRpc\Factories\RequestFactory<extended>
  */
 class RequestFactoryTest extends AbstractUnitTestCase
@@ -38,18 +36,6 @@ class RequestFactoryTest extends AbstractUnitTestCase
     protected $factory;
 
     /**
-     * {@inheritdoc}
-     */
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->factory = $this->app->make(RequestFactory::class);
-    }
-
-    /**
-     * @small
-     *
      * @coversNothing
      *
      * @return void
@@ -60,8 +46,6 @@ class RequestFactoryTest extends AbstractUnitTestCase
     }
 
     /**
-     * @small
-     *
      * @return void
      */
     public function testSuccessResponseToJsonString(): void
@@ -76,8 +60,6 @@ class RequestFactoryTest extends AbstractUnitTestCase
     }
 
     /**
-     * @small
-     *
      * @return void
      */
     public function testResponsesStackToJsonString(): void
@@ -105,8 +87,6 @@ class RequestFactoryTest extends AbstractUnitTestCase
     }
 
     /**
-     * @small
-     *
      * @return void
      */
     public function testResponsesToHttpResponse(): void
@@ -121,8 +101,6 @@ class RequestFactoryTest extends AbstractUnitTestCase
     }
 
     /**
-     * @small
-     *
      * @return void
      */
     public function testResponsesToHttpResponseWithEmptyResponsesStack(): void
@@ -137,8 +115,6 @@ class RequestFactoryTest extends AbstractUnitTestCase
     }
 
     /**
-     * @small
-     *
      * @return void
      */
     public function testErrorResponseToJsonString(): void
@@ -156,8 +132,6 @@ class RequestFactoryTest extends AbstractUnitTestCase
     }
 
     /**
-     * @small
-     *
      * @return void
      */
     public function testErrorResponseToJsonStringWithExceptionRendering(): void
@@ -185,8 +159,6 @@ class RequestFactoryTest extends AbstractUnitTestCase
     }
 
     /**
-     * @small
-     *
      * @return void
      */
     public function testErrorToHttpResponse(): void
@@ -199,8 +171,6 @@ class RequestFactoryTest extends AbstractUnitTestCase
     }
 
     /**
-     * @small
-     *
      * @return void
      */
     public function testErrorCodeConverting(): void
@@ -222,8 +192,6 @@ class RequestFactoryTest extends AbstractUnitTestCase
     }
 
     /**
-     * @small
-     *
      * @return void
      */
     public function testErrorCodeConvertingUsingCustomError(): void
@@ -239,8 +207,6 @@ class RequestFactoryTest extends AbstractUnitTestCase
     }
 
     /**
-     * @small
-     *
      * @return void
      */
     public function testJsonStringToRequestsStackThrowErrorOnInvalidJson(): void
@@ -251,9 +217,7 @@ class RequestFactoryTest extends AbstractUnitTestCase
     }
 
     /**
-     * @small
-     *
-     * @return void
+     * @return dump(123);void
      */
     public function testJsonStringToRequestsStackThrowErrorOnEmptyArray(): void
     {
@@ -263,8 +227,6 @@ class RequestFactoryTest extends AbstractUnitTestCase
     }
 
     /**
-     * @small
-     *
      * @return void
      */
     public function testJsonStringToRequestsStackParamsGetter(): void
@@ -283,8 +245,6 @@ class RequestFactoryTest extends AbstractUnitTestCase
     }
 
     /**
-     * @small
-     *
      * @return void
      */
     public function testJsonStringToRequestsStackErrorRequestPassed(): void
@@ -319,5 +279,15 @@ class RequestFactoryTest extends AbstractUnitTestCase
             {
             }
         };
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->factory = $this->app->make(RequestFactory::class);
     }
 }

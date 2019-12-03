@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace AvtoDev\JsonRpc\Errors;
 
@@ -13,10 +13,7 @@ class ServerError extends AbstractError
      *
      * @param string|null $message Error message
      */
-    public function __construct(?string $message = null,
-                                int $code = 0,
-                                $data = null,
-                                ?Throwable $exception = null)
+    public function __construct(?string $message = null, int $code = 0, $data = null, ?Throwable $exception = null)
     {
         parent::__construct($message ?? 'Server Error', $code, $data, $exception);
     }

@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace AvtoDev\JsonRpc\Tests\Unit\Factories;
 
@@ -14,8 +14,6 @@ use AvtoDev\JsonRpc\Tests\Unit\AbstractUnitTestCase;
 use AvtoDev\JsonRpc\MethodParameters\BaseMethodParameters;
 
 /**
- * @group rpc
- *
  * @coversNothing
  *
  * @see   <https://www.jsonrpc.org/specification#id2>
@@ -38,18 +36,6 @@ class JsonRpcFollowsSpecificationTest extends AbstractUnitTestCase
     protected $router;
 
     /**
-     * {@inheritdoc}
-     */
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->factory = $this->app->make(FactoryInterface::class);
-        $this->kernel  = $this->app->make(Kernel::class);
-        $this->router  = $this->app->make(RouterInterface::class);
-    }
-
-    /**
      * @return void
      */
     public function testRpcCallWithPositionalParameters1(): void
@@ -64,6 +50,22 @@ class JsonRpcFollowsSpecificationTest extends AbstractUnitTestCase
         $output = '{"jsonrpc": "2.0", "result": 19, "id": 1}';
 
         $this->assertJsonStringEqualsJsonString($output, $this->processRawRequest($input));
+    }
+
+    /**
+     * @param string $string
+     *
+     * @return string|null
+     */
+    protected function processRawRequest(string $string): ?string
+    {
+        try {
+            return $this->factory->responsesStackToJsonString(
+                $this->kernel->handle($this->factory->jsonStringToRequestsStack($string))
+            );
+        } catch (ErrorInterface $error) {
+            return $this->factory->errorResponseToJsonString(new ErrorResponse(null, $error));
+        }
     }
 
     /**
@@ -178,6 +180,20 @@ class JsonRpcFollowsSpecificationTest extends AbstractUnitTestCase
     }
 
     /**
+     * Modify JSON string on the fly, using callback function. In callback will be passed encoded json string (in
+     * array format).
+     *
+     * @param string   $string
+     * @param callable $callback
+     *
+     * @return string
+     */
+    protected function modifyJson(string $string, callable $callback): string
+    {
+        return Json::encode($callback(Json::decode($string)));
+    }
+
+    /**
      * @return void
      */
     public function testRpcCallBatchInvalidJSON(): void
@@ -273,7 +289,7 @@ JSON;
     {"jsonrpc": "2.0", "method": "subtract", "params": [42,23], "id": "2"},
     {"foo": "boo"},
     {"jsonrpc": "2.0", "method": "foo.get", "params": {"name": "myself"}, "id": "5"},
-    {"jsonrpc": "2.0", "method": "get_data", "id": "9"} 
+    {"jsonrpc": "2.0", "method": "get_data", "id": "9"}
 ]
 JSON;
 
@@ -313,32 +329,14 @@ JSON;
     }
 
     /**
-     * @param string $string
-     *
-     * @return string|null
+     * {@inheritdoc}
      */
-    protected function processRawRequest(string $string): ?string
+    protected function setUp(): void
     {
-        try {
-            return $this->factory->responsesStackToJsonString(
-                $this->kernel->handle($this->factory->jsonStringToRequestsStack($string))
-            );
-        } catch (ErrorInterface $error) {
-            return $this->factory->errorResponseToJsonString(new ErrorResponse(null, $error));
-        }
-    }
+        parent::setUp();
 
-    /**
-     * Modify JSON string on the fly, using callback function. In callback will be passed encoded json string (in
-     * array format).
-     *
-     * @param string   $string
-     * @param callable $callback
-     *
-     * @return string
-     */
-    protected function modifyJson(string $string, callable $callback): string
-    {
-        return Json::encode($callback(Json::decode($string)));
+        $this->factory = $this->app->make(FactoryInterface::class);
+        $this->kernel  = $this->app->make(Kernel::class);
+        $this->router  = $this->app->make(RouterInterface::class);
     }
 }

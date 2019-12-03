@@ -16,8 +16,6 @@ interface RequestsStackInterface extends Countable, Arrayable, IteratorAggregate
      * Push request into stack.
      *
      * @param ErroredRequestInterface|RequestInterface $request
-     *
-     * @return $this
      */
     public function push($request);
 
@@ -29,7 +27,7 @@ interface RequestsStackInterface extends Countable, Arrayable, IteratorAggregate
     public function first();
 
     /**
-     * @return array
+     * @return mixed[]
      */
     public function all();
 

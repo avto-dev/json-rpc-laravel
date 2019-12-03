@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace AvtoDev\JsonRpc\Tests\Unit\Router;
 
@@ -17,8 +17,6 @@ use AvtoDev\JsonRpc\Requests\RequestInterface as RPCRequest;
 use AvtoDev\JsonRpc\MethodParameters\MethodParametersInterface;
 
 /**
- * @group  rpc
- *
  * @covers \AvtoDev\JsonRpc\Router\Router<extended>
  */
 class RouterTest extends AbstractUnitTestCase
@@ -29,18 +27,6 @@ class RouterTest extends AbstractUnitTestCase
     protected $router;
 
     /**
-     * {@inheritdoc}
-     */
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->router = $this->app->make(Router::class);
-    }
-
-    /**
-     * @small
-     *
      * @return void
      */
     public function testInterfaces(): void
@@ -49,8 +35,6 @@ class RouterTest extends AbstractUnitTestCase
     }
 
     /**
-     * @small
-     *
      * @return void
      */
     public function testActionRegister(): void
@@ -82,8 +66,6 @@ class RouterTest extends AbstractUnitTestCase
     }
 
     /**
-     * @small
-     *
      * @return void
      */
     public function testActionRegisterFails(): void
@@ -102,8 +84,6 @@ class RouterTest extends AbstractUnitTestCase
     }
 
     /**
-     * @small
-     *
      * @return void
      */
     public function testCall(): void
@@ -130,8 +110,6 @@ class RouterTest extends AbstractUnitTestCase
     }
 
     /**
-     * @small
-     *
      * @return void
      */
     public function testCallWithPassingRequestInstance(): void
@@ -167,8 +145,6 @@ class RouterTest extends AbstractUnitTestCase
     }
 
     /**
-     * @small
-     *
      * @return void
      */
     public function testCallFails(): void
@@ -188,5 +164,15 @@ class RouterTest extends AbstractUnitTestCase
     public function someAction(Application $app): Application
     {
         return $app;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->router = $this->app->make(Router::class);
     }
 }

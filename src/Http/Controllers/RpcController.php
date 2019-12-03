@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace AvtoDev\JsonRpc\Http\Controllers;
 
@@ -17,6 +17,8 @@ class RpcController extends Controller
      * @param FactoryInterface $factory
      * @param KernelInterface  $rpc
      *
+     * @throws \AvtoDev\JsonRpc\Errors\InvalidRequestError
+     * @throws \AvtoDev\JsonRpc\Errors\ParseError
      * @return Response
      */
     public function index(Request $request,
@@ -26,14 +28,7 @@ class RpcController extends Controller
         // Convert JSON string to RequestsStack
         $requests = $factory->jsonStringToRequestsStack((string) $request->getContent());
 
-        /*
-         * Optional
-         *
-         * foreach ($requests as $rpc_request) {
-            // Do anything with your requests
-            // ...
-         * }
-        */
+        // Optional: `foreach ($requests as $rpc_request) { ... }`
 
         // Handle an incoming RPC request
         $responses = $rpc->handle($requests);

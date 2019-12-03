@@ -1,21 +1,17 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace AvtoDev\JsonRpc\Tests\Unit\Errors;
 
 use AvtoDev\JsonRpc\Errors\InternalError;
 
 /**
- * @group  rpc
- *
  * @covers \AvtoDev\JsonRpc\Errors\InternalError<extended>
  */
 class InternalErrorTest extends AbstractErrorTestCase
 {
     /**
-     * @small
-     *
      * @return void
      */
     public function testDefaultMessage(): void

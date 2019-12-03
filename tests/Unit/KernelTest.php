@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace AvtoDev\JsonRpc\Tests\Unit;
 
@@ -16,11 +16,12 @@ use AvtoDev\JsonRpc\Requests\ErroredRequest;
 use AvtoDev\JsonRpc\Responses\ErrorResponse;
 use AvtoDev\JsonRpc\Responses\SuccessResponse;
 use AvtoDev\JsonRpc\Errors\MethodNotFoundError;
+use AvtoDev\JsonRpc\Events\RequestHandledEvent;
+use AvtoDev\JsonRpc\Events\ErroredRequestDetectedEvent;
+use AvtoDev\JsonRpc\Events\RequestHandledExceptionEvent;
 use AvtoDev\JsonRpc\Tests\Stubs\BaseMethodParametersStub;
 
 /**
- * @group  rpc
- *
  * @covers \AvtoDev\JsonRpc\Kernel<extended>
  */
 class KernelTest extends AbstractUnitTestCase
@@ -36,19 +37,6 @@ class KernelTest extends AbstractUnitTestCase
     protected $router;
 
     /**
-     * {@inheritdoc}
-     */
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->kernel = $this->app->make(Kernel::class);
-        $this->router = $this->app->make(RouterInterface::class);
-    }
-
-    /**
-     * @small
-     *
      * @return void
      */
     public function testInterfaces(): void
@@ -57,12 +45,16 @@ class KernelTest extends AbstractUnitTestCase
     }
 
     /**
-     * @small
-     *
      * @return void
      */
     public function testHandleWithEmpty(): void
     {
+        $this->doesntExpectEvents([
+            ErroredRequestDetectedEvent::class,
+            RequestHandledEvent::class,
+            RequestHandledExceptionEvent::class,
+        ]);
+
         $this->assertEmpty($responses = $this->kernel->handle(new RequestsStack(true)));
         $this->assertTrue($responses->isBatch());
 
@@ -71,17 +63,25 @@ class KernelTest extends AbstractUnitTestCase
     }
 
     /**
-     * @small
-     *
      * @return void
      */
     public function testHandleNotifications(): void
     {
-        $this->router->on($method1 = 'foo', function (): bool {
+        //$this->doesntExpectEvents([
+        //    ErroredRequestDetectedEvent::class,
+        //    RequestHandledExceptionEvent::class,
+        //
+        //]);
+        //
+        //$this->expectsEvents([
+        //    RequestHandledEvent::class,
+        //]);
+
+        $this->router->on($method1 = 'foo', static function (): bool {
             return true;
         });
 
-        $this->router->on($method2 = 'bar', function (): bool {
+        $this->router->on($method2 = 'bar', static function (): bool {
             return false;
         });
 
@@ -96,8 +96,6 @@ class KernelTest extends AbstractUnitTestCase
     }
 
     /**
-     * @small
-     *
      * @return void
      */
     public function testHandleErroredRequests(): void
@@ -127,8 +125,6 @@ class KernelTest extends AbstractUnitTestCase
     }
 
     /**
-     * @small
-     *
      * @return void
      */
     public function testHandleNonExistsMethod(): void
@@ -147,8 +143,6 @@ class KernelTest extends AbstractUnitTestCase
     }
 
     /**
-     * @small
-     *
      * @return void
      */
     public function testHandleMethodThrowAnException(): void
@@ -201,5 +195,16 @@ class KernelTest extends AbstractUnitTestCase
         $last = $responses->all()[1];
         $this->assertInstanceOf(SuccessResponse::class, $last);
         $this->assertNull($last->getResult());
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->kernel = $this->app->make(Kernel::class);
+        $this->router = $this->app->make(RouterInterface::class);
     }
 }

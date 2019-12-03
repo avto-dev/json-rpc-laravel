@@ -1,21 +1,17 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace AvtoDev\JsonRpc\Tests\Unit\Errors;
 
 use AvtoDev\JsonRpc\Errors\InvalidRequestError;
 
 /**
- * @group  rpc
- *
  * @covers \AvtoDev\JsonRpc\Errors\InvalidRequestError<extended>
  */
 class InvalidRequestErrorTest extends AbstractErrorTestCase
 {
     /**
-     * @small
-     *
      * @return void
      */
     public function testDefaultMessage(): void
