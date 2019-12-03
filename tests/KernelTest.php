@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace AvtoDev\JsonRpc\Tests;
 
 use stdClass;
+use Exception;
 use AvtoDev\JsonRpc\Kernel;
 use Illuminate\Support\Str;
 use AvtoDev\JsonRpc\KernelInterface;
@@ -37,6 +38,17 @@ class KernelTest extends AbstractTestCase
     protected $router;
 
     /**
+     * {@inheritdoc}
+     */
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->kernel = $this->app->make(Kernel::class);
+        $this->router = $this->app->make(RouterInterface::class);
+    }
+
+    /**
      * @return void
      */
     public function testInterfaces(): void
@@ -63,19 +75,21 @@ class KernelTest extends AbstractTestCase
     }
 
     /**
+     * @throws Exception
+     *
      * @return void
      */
     public function testHandleNotifications(): void
     {
-        //$this->doesntExpectEvents([
-        //    ErroredRequestDetectedEvent::class,
-        //    RequestHandledExceptionEvent::class,
-        //
-        //]);
-        //
-        //$this->expectsEvents([
-        //    RequestHandledEvent::class,
-        //]);
+        $this->doesntExpectEvents([
+            ErroredRequestDetectedEvent::class,
+            RequestHandledExceptionEvent::class,
+
+        ]);
+
+        $this->expectsEvents([
+            RequestHandledEvent::class,
+        ]);
 
         $this->router->on($method1 = 'foo', static function (): bool {
             return true;
@@ -86,7 +100,7 @@ class KernelTest extends AbstractTestCase
         });
 
         $requests = new RequestsStack(true);
-        $requests->push(new Request($id = Str::random(), $method1, null, new stdClass));
+        $requests->push($r = new Request($id = Str::random(), $method1, null, new stdClass));
         $requests->push(new Request(null, $method2, null, new stdClass)); // Should not returns
 
         $responses = $this->kernel->handle($requests);
@@ -96,10 +110,22 @@ class KernelTest extends AbstractTestCase
     }
 
     /**
+     * @throws Exception
+     *
      * @return void
      */
     public function testHandleErroredRequests(): void
     {
+        $this->doesntExpectEvents([
+            RequestHandledExceptionEvent::class,
+
+        ]);
+
+        $this->expectsEvents([
+            ErroredRequestDetectedEvent::class,
+            RequestHandledEvent::class,
+        ]);
+
         $this->router->on($method = 'foo', function (): bool {
             return true;
         });
@@ -125,10 +151,22 @@ class KernelTest extends AbstractTestCase
     }
 
     /**
+     * @throws Exception
+     *
      * @return void
      */
     public function testHandleNonExistsMethod(): void
     {
+        $this->doesntExpectEvents([
+            RequestHandledExceptionEvent::class,
+            RequestHandledEvent::class,
+
+        ]);
+
+        $this->expectsEvents([
+            ErroredRequestDetectedEvent::class,
+        ]);
+
         $requests = new RequestsStack(true);
         $requests->push(new Request($id = Str::random(), Str::random(), null, new stdClass));
 
@@ -143,10 +181,22 @@ class KernelTest extends AbstractTestCase
     }
 
     /**
+     * @throws Exception
+     *
      * @return void
      */
     public function testHandleMethodThrowAnException(): void
     {
+        $this->doesntExpectEvents([
+            RequestHandledExceptionEvent::class,
+            RequestHandledEvent::class,
+
+        ]);
+
+        $this->expectsEvents([
+            ErroredRequestDetectedEvent::class,
+        ]);
+
         $this->router->on($method = 'foo', function (): void {
             throw new \RuntimeException;
         });
@@ -171,6 +221,15 @@ class KernelTest extends AbstractTestCase
      */
     public function testBatchCall(): void
     {
+        $this->doesntExpectEvents([
+            RequestHandledExceptionEvent::class,
+            ErroredRequestDetectedEvent::class,
+        ]);
+
+        $this->expectsEvents([
+            RequestHandledEvent::class,
+        ]);
+
         $this->router->on($name = 'foo', function (BaseMethodParametersStub $parameters): ?string {
             return $parameters->getId();
         });
@@ -195,16 +254,5 @@ class KernelTest extends AbstractTestCase
         $last = $responses->all()[1];
         $this->assertInstanceOf(SuccessResponse::class, $last);
         $this->assertNull($last->getResult());
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->kernel = $this->app->make(Kernel::class);
-        $this->router = $this->app->make(RouterInterface::class);
     }
 }

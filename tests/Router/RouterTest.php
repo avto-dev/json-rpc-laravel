@@ -27,6 +27,16 @@ class RouterTest extends AbstractTestCase
     protected $router;
 
     /**
+     * {@inheritdoc}
+     */
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->router = $this->app->make(Router::class);
+    }
+
+    /**
      * @return void
      */
     public function testInterfaces(): void
@@ -164,15 +174,5 @@ class RouterTest extends AbstractTestCase
     public function someAction(Application $app): Application
     {
         return $app;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->router = $this->app->make(Router::class);
     }
 }
