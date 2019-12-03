@@ -1,15 +1,17 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace AvtoDev\JsonRpc\Tests\Http\Controllers;
 
 use Mockery as m;
 use RuntimeException;
 use Illuminate\Support\Str;
+use Illuminate\Support\Arr;
 use AvtoDev\JsonRpc\KernelInterface;
 use AvtoDev\JsonRpc\Router\RouterInterface;
 use AvtoDev\JsonRpc\Tests\AbstractTestCase;
+use Illuminate\Foundation\Testing\TestResponse;
 use AvtoDev\JsonRpc\Http\Controllers\RpcController;
 use Illuminate\Contracts\Routing\Registrar as HttpRegistrar;
 
@@ -50,16 +52,17 @@ class RpcControllerTest extends AbstractTestCase
             return 'bar';
         });
 
-        $this
+        $response = $this
             ->postJson('/rpc', [
                 'jsonrpc' => 2.0,
                 'method'  => $method,
                 'id'      => $id = Str::random(),
             ])
             ->assertStatus(200)
-            ->assertJsonStructure(['jsonrpc', 'result', 'id'])
-            ->assertJsonPath('id', $id)
-            ->assertJsonPath('result', 'bar');
+            ->assertJsonStructure(['jsonrpc', 'result', 'id']);
+
+        $this->assertJsonPath($response, 'id', $id);
+        $this->assertJsonPath($response, 'result', 'bar');
     }
 
     /**
@@ -67,16 +70,17 @@ class RpcControllerTest extends AbstractTestCase
      */
     public function testMissingMethodCalling(): void
     {
-        $this
+        $response = $this
             ->postJson('/rpc', [
                 'jsonrpc' => 2.0,
                 'method'  => Str::random(),
                 'id'      => $id = Str::random(),
             ])
             ->assertStatus(200)
-            ->assertJsonStructure(['jsonrpc', 'error', 'id'])
-            ->assertJsonPath('id', $id)
-            ->assertJsonPath('error.code', -32601);
+            ->assertJsonStructure(['jsonrpc', 'error', 'id']);
+
+        $this->assertJsonPath($response, 'id', $id);
+        $this->assertJsonPath($response, 'error.code', -32601);
     }
 
     /**
@@ -84,34 +88,36 @@ class RpcControllerTest extends AbstractTestCase
      */
     public function testEmptyRequestPassing(): void
     {
-        $this
+        $response = $this
             ->post('/rpc', [])
             ->assertStatus(200)
-            ->assertJsonStructure(['jsonrpc', 'error', 'id'])
-            ->assertJsonPath('id', null)
-            ->assertJsonPath('error.code', -32700);
+            ->assertJsonStructure(['jsonrpc', 'error', 'id']);
+
+        $this->assertJsonPath($response, 'id', null);
+        $this->assertJsonPath($response, 'error.code', -32700);
     }
 
     /**
      * @return void
      */
-    public function testRpcMethodThrowsAnExceptionProcessing(): void
+    public function testRpcMethodThrowsAnException(): void
     {
         $this->router->on($method = 'foo', static function (): void {
             throw new RuntimeException('foo exception');
         });
 
-        $this
+        $response = $this
             ->postJson('/rpc', [
                 'jsonrpc' => 2.0,
                 'method'  => $method,
                 'id'      => $id = Str::random(),
             ])
             ->assertStatus(200)
-            ->assertJsonStructure(['jsonrpc', 'error', 'id'])
-            ->assertJsonPath('id', $id)
-            ->assertJsonPath('error.code', -32603)
-            ->assertJsonPath('error.data.message', 'foo exception');
+            ->assertJsonStructure(['jsonrpc', 'error' => ['code', 'data'], 'id']);
+
+        $this->assertJsonPath($response, 'id', $id);
+        $this->assertJsonPath($response, 'error.code', -32603);
+        $this->assertJsonPath($response, 'error.data.message', 'foo exception');
     }
 
     /**
@@ -126,15 +132,28 @@ class RpcControllerTest extends AbstractTestCase
                 ->getMock();
         });
 
-        $this
+        $response = $this
             ->postJson('/rpc', [
                 'jsonrpc' => 2.0,
                 'method'  => Str::random(),
                 'id'      => Str::random(),
             ])
             ->assertStatus(200)
-            ->assertJsonStructure(['jsonrpc', 'error', 'id'])
-            ->assertJsonPath('error.message', 'Server error: foo exception')
-            ->assertJsonPath('error.code', -32099);
+            ->assertJsonStructure(['jsonrpc', 'error', 'id']);
+
+        $this->assertJsonPath($response, 'error.message', 'Server error: foo exception');
+        $this->assertJsonPath($response, 'error.code', -32099);
+    }
+
+    /**
+     * @param TestResponse $response
+     * @param string       $path
+     * @param              $expect
+     *
+     * @return void
+     */
+    private function assertJsonPath(TestResponse $response, string $path, $expect): void
+    {
+        $this->assertSame($expect, Arr::get($response->decodeResponseJson(), $path));
     }
 }
