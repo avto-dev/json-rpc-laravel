@@ -41,7 +41,7 @@ class Request implements RequestInterface
      *
      * @throws InvalidArgumentException If passed not valid arguments
      */
-    public function __construct($id, string $method, $params = null, ?object $raw = null)
+    public function __construct($id, string $method, $params = null, $raw = null)
     {
         $this->validateIdValue($id, true);
         $this->validateParamsValue($params, true);
@@ -99,7 +99,7 @@ class Request implements RequestInterface
     /**
      * {@inheritdoc}
      */
-    public function getRawRequest(): ?object
+    public function getRawRequest()
     {
         return $this->raw;
     }
