@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace AvtoDev\JsonRpc\Tests\Router;
 
@@ -10,8 +10,8 @@ use InvalidArgumentException;
 use AvtoDev\JsonRpc\Router\Router;
 use AvtoDev\JsonRpc\Requests\Request;
 use AvtoDev\JsonRpc\Router\RouterInterface;
-use Illuminate\Contracts\Foundation\Application;
 use AvtoDev\JsonRpc\Tests\AbstractTestCase;
+use Illuminate\Contracts\Foundation\Application;
 use AvtoDev\JsonRpc\MethodParameters\BaseMethodParameters;
 use AvtoDev\JsonRpc\Requests\RequestInterface as RPCRequest;
 use AvtoDev\JsonRpc\MethodParameters\MethodParametersInterface;

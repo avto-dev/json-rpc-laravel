@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace AvtoDev\JsonRpc\Tests\Avtodev\JsonRpc;
 
@@ -8,9 +8,9 @@ use AvtoDev\JsonRpc\Kernel;
 use AvtoDev\JsonRpc\Router\Router;
 use AvtoDev\JsonRpc\KernelInterface;
 use AvtoDev\JsonRpc\Router\RouterInterface;
+use AvtoDev\JsonRpc\Tests\AbstractTestCase;
 use AvtoDev\JsonRpc\Factories\RequestFactory;
 use AvtoDev\JsonRpc\Factories\FactoryInterface;
-use AvtoDev\JsonRpc\Tests\AbstractTestCase;
 
 /**
  * @covers \AvtoDev\JsonRpc\ServiceProvider<extended>

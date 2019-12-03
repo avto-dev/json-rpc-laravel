@@ -1,15 +1,15 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace AvtoDev\JsonRpc\Tests\Responses;
 
 use Illuminate\Support\Str;
+use AvtoDev\JsonRpc\Tests\AbstractTestCase;
 use AvtoDev\JsonRpc\Responses\ErrorResponse;
 use AvtoDev\JsonRpc\Responses\ResponsesStack;
 use AvtoDev\JsonRpc\Responses\SuccessResponse;
 use AvtoDev\JsonRpc\Errors\MethodNotFoundError;
-use AvtoDev\JsonRpc\Tests\AbstractTestCase;
 use AvtoDev\JsonRpc\Responses\ResponsesStackInterface;
 
 /**
@@ -21,6 +21,16 @@ class ResponsesStackTest extends AbstractTestCase
      * @var ResponsesStack
      */
     protected $instance;
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->instance = $this->instanceFactory();
+    }
 
     /**
      * @return void
@@ -84,16 +94,6 @@ class ResponsesStackTest extends AbstractTestCase
     {
         $this->assertTrue((new ResponsesStack(true))->isBatch());
         $this->assertFalse((new ResponsesStack(false))->isBatch());
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->instance = $this->instanceFactory();
     }
 
     /**

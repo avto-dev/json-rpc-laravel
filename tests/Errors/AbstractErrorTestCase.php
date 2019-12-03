@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace AvtoDev\JsonRpc\Tests\Errors;
 
@@ -15,6 +15,16 @@ abstract class AbstractErrorTestCase extends AbstractTestCase
      * @var ErrorInterface|Exception
      */
     protected $error;
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->error = $this->errorFactory();
+    }
 
     /**
      * @return void
@@ -41,16 +51,6 @@ abstract class AbstractErrorTestCase extends AbstractTestCase
         $this->assertSame($code, $this->error->getCode());
         $this->assertSame($data, $this->error->getData());
         $this->assertSame($exception, $this->error->getPrevious());
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->error = $this->errorFactory();
     }
 
     /**

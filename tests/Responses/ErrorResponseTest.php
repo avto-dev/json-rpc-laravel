@@ -1,14 +1,14 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace AvtoDev\JsonRpc\Tests\Responses;
 
 use Illuminate\Support\Str;
 use InvalidArgumentException;
+use AvtoDev\JsonRpc\Tests\AbstractTestCase;
 use AvtoDev\JsonRpc\Responses\ErrorResponse;
 use AvtoDev\JsonRpc\Errors\MethodNotFoundError;
-use AvtoDev\JsonRpc\Tests\AbstractTestCase;
 use AvtoDev\JsonRpc\Responses\ErrorResponseInterface;
 
 /**
@@ -17,6 +17,16 @@ use AvtoDev\JsonRpc\Responses\ErrorResponseInterface;
 class ErrorResponseTest extends AbstractTestCase
 {
     protected $response;
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->response = new ErrorResponse(null, new MethodNotFoundError);
+    }
 
     /**
      * @return void
@@ -62,15 +72,5 @@ class ErrorResponseTest extends AbstractTestCase
         $error = new MethodNotFoundError;
 
         $this->assertSame($error, (new ErrorResponse(null, $error))->getError());
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->response = new ErrorResponse(null, new MethodNotFoundError);
     }
 }
