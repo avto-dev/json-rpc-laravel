@@ -1,11 +1,11 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace AvtoDev\JsonRpc\Requests;
 
-use AvtoDev\JsonRpc\Traits\ValidateNonStrictValuesTrait;
 use InvalidArgumentException;
+use AvtoDev\JsonRpc\Traits\ValidateNonStrictValuesTrait;
 
 class Request implements RequestInterface
 {

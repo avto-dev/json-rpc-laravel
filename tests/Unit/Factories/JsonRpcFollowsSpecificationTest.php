@@ -1,17 +1,17 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace AvtoDev\JsonRpc\Tests\Unit\Factories;
 
-use AvtoDev\JsonRpc\Errors\ErrorInterface;
-use AvtoDev\JsonRpc\Factories\FactoryInterface;
 use AvtoDev\JsonRpc\Kernel;
-use AvtoDev\JsonRpc\MethodParameters\BaseMethodParameters;
-use AvtoDev\JsonRpc\Responses\ErrorResponse;
-use AvtoDev\JsonRpc\Router\RouterInterface;
-use AvtoDev\JsonRpc\Tests\Unit\AbstractUnitTestCase;
 use Tarampampam\Wrappers\Json;
+use AvtoDev\JsonRpc\Errors\ErrorInterface;
+use AvtoDev\JsonRpc\Router\RouterInterface;
+use AvtoDev\JsonRpc\Responses\ErrorResponse;
+use AvtoDev\JsonRpc\Factories\FactoryInterface;
+use AvtoDev\JsonRpc\Tests\Unit\AbstractUnitTestCase;
+use AvtoDev\JsonRpc\MethodParameters\BaseMethodParameters;
 
 /**
  * @group rpc

@@ -1,13 +1,13 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace AvtoDev\JsonRpc\Errors;
 
-use AvtoDev\JsonRpc\Traits\ValidateNonStrictValuesTrait;
 use Exception;
-use InvalidArgumentException;
 use Throwable;
+use InvalidArgumentException;
+use AvtoDev\JsonRpc\Traits\ValidateNonStrictValuesTrait;
 
 abstract class AbstractError extends Exception implements ErrorInterface
 {

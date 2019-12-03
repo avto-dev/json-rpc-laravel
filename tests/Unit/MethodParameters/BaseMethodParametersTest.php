@@ -1,11 +1,11 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace AvtoDev\JsonRpc\Tests\Unit\MethodParameters;
 
-use AvtoDev\JsonRpc\MethodParameters\BaseMethodParameters;
 use AvtoDev\JsonRpc\Tests\Unit\AbstractUnitTestCase;
+use AvtoDev\JsonRpc\MethodParameters\BaseMethodParameters;
 
 /**
  * @group  rpc

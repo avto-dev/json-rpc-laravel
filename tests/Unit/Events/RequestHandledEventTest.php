@@ -1,12 +1,12 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace AvtoDev\JsonRpc\Tests\Unit\Events;
 
-use AvtoDev\JsonRpc\Events\RequestHandledEvent;
 use AvtoDev\JsonRpc\Requests\Request;
 use AvtoDev\JsonRpc\Tests\AbstractTestCase;
+use AvtoDev\JsonRpc\Events\RequestHandledEvent;
 
 /**
  * @covers \AvtoDev\JsonRpc\Events\RequestHandledEvent<extended>

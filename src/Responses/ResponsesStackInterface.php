@@ -3,9 +3,9 @@
 namespace AvtoDev\JsonRpc\Responses;
 
 use Countable;
-use Illuminate\Contracts\Support\Arrayable;
-use IteratorAggregate;
 use LogicException;
+use IteratorAggregate;
+use Illuminate\Contracts\Support\Arrayable;
 
 /**
  * @see ResponsesStack

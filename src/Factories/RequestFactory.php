@@ -1,30 +1,30 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace AvtoDev\JsonRpc\Factories;
 
-use AvtoDev\JsonRpc\Errors\ErrorInterface;
+use Throwable;
+use InvalidArgumentException;
+use Tarampampam\Wrappers\Json;
+use AvtoDev\JsonRpc\Requests\Request;
+use AvtoDev\JsonRpc\Errors\ParseError;
+use AvtoDev\JsonRpc\Errors\ServerError;
 use AvtoDev\JsonRpc\Errors\InternalError;
+use AvtoDev\JsonRpc\Errors\ErrorInterface;
+use AvtoDev\JsonRpc\Requests\RequestsStack;
+use AvtoDev\JsonRpc\Requests\ErroredRequest;
 use AvtoDev\JsonRpc\Errors\InvalidParamsError;
 use AvtoDev\JsonRpc\Errors\InvalidRequestError;
 use AvtoDev\JsonRpc\Errors\MethodNotFoundError;
-use AvtoDev\JsonRpc\Errors\ParseError;
-use AvtoDev\JsonRpc\Errors\ServerError;
-use AvtoDev\JsonRpc\Requests\ErroredRequest;
-use AvtoDev\JsonRpc\Requests\Request;
-use AvtoDev\JsonRpc\Requests\RequestsStack;
+use AvtoDev\JsonRpc\Responses\ResponseInterface;
 use AvtoDev\JsonRpc\Requests\RequestsStackInterface;
 use AvtoDev\JsonRpc\Responses\ErrorResponseInterface;
-use AvtoDev\JsonRpc\Responses\ResponseInterface;
 use AvtoDev\JsonRpc\Responses\ResponsesStackInterface;
 use AvtoDev\JsonRpc\Responses\SuccessResponseInterface;
 use AvtoDev\JsonRpc\Traits\ValidateNonStrictValuesTrait;
-use InvalidArgumentException;
 use Symfony\Component\HttpFoundation\Response as HttpResponse;
 use Tarampampam\Wrappers\Exceptions\JsonEncodeDecodeException;
-use Tarampampam\Wrappers\Json;
-use Throwable;
 
 class RequestFactory implements FactoryInterface
 {

@@ -1,14 +1,14 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace AvtoDev\JsonRpc\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use AvtoDev\JsonRpc\Factories\FactoryInterface;
-use AvtoDev\JsonRpc\KernelInterface;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use AvtoDev\JsonRpc\KernelInterface;
 use Symfony\Component\HttpFoundation\Response;
+use AvtoDev\JsonRpc\Factories\FactoryInterface;
 
 class RpcController extends Controller
 {

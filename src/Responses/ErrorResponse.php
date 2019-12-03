@@ -1,12 +1,12 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace AvtoDev\JsonRpc\Responses;
 
+use InvalidArgumentException;
 use AvtoDev\JsonRpc\Errors\ErrorInterface;
 use AvtoDev\JsonRpc\Traits\ValidateNonStrictValuesTrait;
-use InvalidArgumentException;
 
 class ErrorResponse implements ErrorResponseInterface
 {

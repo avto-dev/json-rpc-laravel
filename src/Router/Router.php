@@ -1,14 +1,14 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace AvtoDev\JsonRpc\Router;
 
-use AvtoDev\JsonRpc\MethodParameters\MethodParametersInterface as ParametersInterface;
-use AvtoDev\JsonRpc\Requests\RequestInterface as RPCRequest;
 use Closure;
-use Illuminate\Contracts\Container\Container;
 use InvalidArgumentException;
+use Illuminate\Contracts\Container\Container;
+use AvtoDev\JsonRpc\Requests\RequestInterface as RPCRequest;
+use AvtoDev\JsonRpc\MethodParameters\MethodParametersInterface as ParametersInterface;
 
 class Router implements RouterInterface
 {

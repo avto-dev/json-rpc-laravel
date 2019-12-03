@@ -1,16 +1,16 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace AvtoDev\JsonRpc\Tests\Unit\Requests;
 
-use AvtoDev\JsonRpc\Errors\MethodNotFoundError;
-use AvtoDev\JsonRpc\Requests\ErroredRequest;
+use Illuminate\Support\Str;
 use AvtoDev\JsonRpc\Requests\Request;
 use AvtoDev\JsonRpc\Requests\RequestsStack;
+use AvtoDev\JsonRpc\Requests\ErroredRequest;
+use AvtoDev\JsonRpc\Errors\MethodNotFoundError;
 use AvtoDev\JsonRpc\Requests\RequestsStackInterface;
 use AvtoDev\JsonRpc\Tests\Unit\AbstractUnitTestCase;
-use Illuminate\Support\Str;
 
 /**
  * @group  rpc

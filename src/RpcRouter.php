@@ -1,12 +1,12 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace AvtoDev\JsonRpc;
 
-use AvtoDev\JsonRpc\Requests\RequestInterface as RPCRequest;
-use AvtoDev\JsonRpc\Router\RouterInterface;
 use Illuminate\Support\Facades\Facade;
+use AvtoDev\JsonRpc\Router\RouterInterface;
+use AvtoDev\JsonRpc\Requests\RequestInterface as RPCRequest;
 
 /**
  * @method static void on(string $method_name, $do_action)

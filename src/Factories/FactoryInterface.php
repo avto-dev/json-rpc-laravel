@@ -2,14 +2,14 @@
 
 namespace AvtoDev\JsonRpc\Factories;
 
-use AvtoDev\JsonRpc\Errors\InvalidRequestError;
+use InvalidArgumentException;
 use AvtoDev\JsonRpc\Errors\ParseError;
+use AvtoDev\JsonRpc\Errors\InvalidRequestError;
+use AvtoDev\JsonRpc\Responses\ResponseInterface;
 use AvtoDev\JsonRpc\Requests\RequestsStackInterface;
 use AvtoDev\JsonRpc\Responses\ErrorResponseInterface;
-use AvtoDev\JsonRpc\Responses\ResponseInterface;
 use AvtoDev\JsonRpc\Responses\ResponsesStackInterface;
 use AvtoDev\JsonRpc\Responses\SuccessResponseInterface;
-use InvalidArgumentException;
 use Symfony\Component\HttpFoundation\Response as HttpResponse;
 
 /**

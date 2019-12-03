@@ -1,11 +1,11 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace AvtoDev\JsonRpc\Events;
 
-use AvtoDev\JsonRpc\Requests\RequestInterface;
 use Throwable;
+use AvtoDev\JsonRpc\Requests\RequestInterface;
 
 class RequestHandledExceptionEvent
 {

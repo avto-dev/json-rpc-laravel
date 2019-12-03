@@ -1,25 +1,25 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace AvtoDev\JsonRpc;
 
-use AvtoDev\JsonRpc\Errors\ErrorInterface;
+use Throwable;
 use AvtoDev\JsonRpc\Errors\InternalError;
-use AvtoDev\JsonRpc\Errors\MethodNotFoundError;
-use AvtoDev\JsonRpc\Events\ErroredRequestDetectedEvent;
-use AvtoDev\JsonRpc\Events\RequestHandledEvent;
-use AvtoDev\JsonRpc\Events\RequestHandledExceptionEvent;
-use AvtoDev\JsonRpc\Requests\ErroredRequestInterface;
-use AvtoDev\JsonRpc\Requests\RequestInterface;
-use AvtoDev\JsonRpc\Requests\RequestsStackInterface;
+use AvtoDev\JsonRpc\Errors\ErrorInterface;
+use AvtoDev\JsonRpc\Router\RouterInterface;
 use AvtoDev\JsonRpc\Responses\ErrorResponse;
 use AvtoDev\JsonRpc\Responses\ResponsesStack;
-use AvtoDev\JsonRpc\Responses\ResponsesStackInterface;
+use AvtoDev\JsonRpc\Requests\RequestInterface;
 use AvtoDev\JsonRpc\Responses\SuccessResponse;
-use AvtoDev\JsonRpc\Router\RouterInterface;
+use AvtoDev\JsonRpc\Errors\MethodNotFoundError;
+use AvtoDev\JsonRpc\Events\RequestHandledEvent;
+use AvtoDev\JsonRpc\Requests\RequestsStackInterface;
+use AvtoDev\JsonRpc\Requests\ErroredRequestInterface;
+use AvtoDev\JsonRpc\Responses\ResponsesStackInterface;
+use AvtoDev\JsonRpc\Events\ErroredRequestDetectedEvent;
+use AvtoDev\JsonRpc\Events\RequestHandledExceptionEvent;
 use Illuminate\Contracts\Events\Dispatcher as EventsDispatcher;
-use Throwable;
 
 class Kernel implements KernelInterface
 {

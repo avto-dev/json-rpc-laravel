@@ -1,13 +1,13 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace AvtoDev\JsonRpc;
 
-use AvtoDev\JsonRpc\Factories\FactoryInterface;
-use AvtoDev\JsonRpc\Factories\RequestFactory;
 use AvtoDev\JsonRpc\Router\Router;
 use AvtoDev\JsonRpc\Router\RouterInterface;
+use AvtoDev\JsonRpc\Factories\RequestFactory;
+use AvtoDev\JsonRpc\Factories\FactoryInterface;
 
 class ServiceProvider extends \Illuminate\Support\ServiceProvider
 {

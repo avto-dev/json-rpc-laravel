@@ -1,13 +1,13 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace AvtoDev\JsonRpc\Tests\Unit\Events;
 
-use AvtoDev\JsonRpc\Errors\InternalError;
-use AvtoDev\JsonRpc\Events\RequestHandledExceptionEvent;
 use AvtoDev\JsonRpc\Requests\Request;
+use AvtoDev\JsonRpc\Errors\InternalError;
 use AvtoDev\JsonRpc\Tests\AbstractTestCase;
+use AvtoDev\JsonRpc\Events\RequestHandledExceptionEvent;
 
 /**
  * @covers \AvtoDev\JsonRpc\Events\RequestHandledExceptionEvent<extended>

@@ -1,15 +1,15 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace AvtoDev\JsonRpc\Tests\Unit\Responses;
 
-use AvtoDev\JsonRpc\Errors\MethodNotFoundError;
-use AvtoDev\JsonRpc\Responses\ErrorResponse;
-use AvtoDev\JsonRpc\Responses\ErrorResponseInterface;
-use AvtoDev\JsonRpc\Tests\Unit\AbstractUnitTestCase;
 use Illuminate\Support\Str;
 use InvalidArgumentException;
+use AvtoDev\JsonRpc\Responses\ErrorResponse;
+use AvtoDev\JsonRpc\Errors\MethodNotFoundError;
+use AvtoDev\JsonRpc\Tests\Unit\AbstractUnitTestCase;
+use AvtoDev\JsonRpc\Responses\ErrorResponseInterface;
 
 /**
  * @group  rpc

@@ -1,16 +1,16 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace AvtoDev\JsonRpc\Tests;
 
-use AvtoDev\JsonRpc\ServiceProvider;
-use AvtoDev\JsonRpc\Tests\Traits\WithFaker;
 use Dotenv\Dotenv;
-use Illuminate\Config\Repository as ConfigRepository;
-use Illuminate\Contracts\Console\Kernel;
+use AvtoDev\JsonRpc\ServiceProvider;
 use Illuminate\Foundation\Application;
+use Illuminate\Contracts\Console\Kernel;
+use AvtoDev\JsonRpc\Tests\Traits\WithFaker;
 use Illuminate\Foundation\Testing\TestCase;
+use Illuminate\Config\Repository as ConfigRepository;
 
 abstract class AbstractTestCase extends TestCase
 {

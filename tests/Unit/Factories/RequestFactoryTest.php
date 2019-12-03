@@ -1,29 +1,29 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace AvtoDev\JsonRpc\Tests\Unit\Factories;
 
-use AvtoDev\JsonRpc\Errors\ErrorInterface;
-use AvtoDev\JsonRpc\Errors\InternalError;
-use AvtoDev\JsonRpc\Errors\InvalidParamsError;
-use AvtoDev\JsonRpc\Errors\InvalidRequestError;
-use AvtoDev\JsonRpc\Errors\MethodNotFoundError;
-use AvtoDev\JsonRpc\Errors\ParseError;
-use AvtoDev\JsonRpc\Errors\ServerError;
-use AvtoDev\JsonRpc\Factories\FactoryInterface;
-use AvtoDev\JsonRpc\Factories\RequestFactory;
-use AvtoDev\JsonRpc\Requests\ErroredRequest;
-use AvtoDev\JsonRpc\Requests\Request;
-use AvtoDev\JsonRpc\Responses\ErrorResponse;
-use AvtoDev\JsonRpc\Responses\ResponseInterface;
-use AvtoDev\JsonRpc\Responses\ResponsesStack;
-use AvtoDev\JsonRpc\Responses\SuccessResponse;
-use AvtoDev\JsonRpc\Tests\Unit\AbstractUnitTestCase;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
-use Symfony\Component\HttpFoundation\Response as HttpResponse;
 use Tarampampam\Wrappers\Json;
+use AvtoDev\JsonRpc\Requests\Request;
+use AvtoDev\JsonRpc\Errors\ParseError;
+use AvtoDev\JsonRpc\Errors\ServerError;
+use AvtoDev\JsonRpc\Errors\InternalError;
+use AvtoDev\JsonRpc\Errors\ErrorInterface;
+use AvtoDev\JsonRpc\Requests\ErroredRequest;
+use AvtoDev\JsonRpc\Responses\ErrorResponse;
+use AvtoDev\JsonRpc\Factories\RequestFactory;
+use AvtoDev\JsonRpc\Responses\ResponsesStack;
+use AvtoDev\JsonRpc\Errors\InvalidParamsError;
+use AvtoDev\JsonRpc\Responses\SuccessResponse;
+use AvtoDev\JsonRpc\Errors\InvalidRequestError;
+use AvtoDev\JsonRpc\Errors\MethodNotFoundError;
+use AvtoDev\JsonRpc\Factories\FactoryInterface;
+use AvtoDev\JsonRpc\Responses\ResponseInterface;
+use AvtoDev\JsonRpc\Tests\Unit\AbstractUnitTestCase;
+use Symfony\Component\HttpFoundation\Response as HttpResponse;
 
 /**
  * @group  rpc

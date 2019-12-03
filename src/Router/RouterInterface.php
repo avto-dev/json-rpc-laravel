@@ -2,9 +2,9 @@
 
 namespace AvtoDev\JsonRpc\Router;
 
-use AvtoDev\JsonRpc\Requests\RequestInterface as RPCRequest;
-use InvalidArgumentException;
 use RuntimeException;
+use InvalidArgumentException;
+use AvtoDev\JsonRpc\Requests\RequestInterface as RPCRequest;
 
 interface RouterInterface
 {
