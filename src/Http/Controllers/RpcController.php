@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace AvtoDev\JsonRpc\Http\Controllers;
 
@@ -19,6 +19,7 @@ class RpcController extends Controller
      *
      * @throws \AvtoDev\JsonRpc\Errors\InvalidRequestError
      * @throws \AvtoDev\JsonRpc\Errors\ParseError
+     *
      * @return Response
      */
     public function index(Request $request,

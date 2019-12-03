@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace AvtoDev\JsonRpc\Tests\Requests;
 
@@ -8,8 +8,8 @@ use stdClass;
 use Illuminate\Support\Str;
 use InvalidArgumentException;
 use AvtoDev\JsonRpc\Requests\Request;
-use AvtoDev\JsonRpc\Requests\RequestInterface;
 use AvtoDev\JsonRpc\Tests\AbstractTestCase;
+use AvtoDev\JsonRpc\Requests\RequestInterface;
 
 /**
  * @covers \AvtoDev\JsonRpc\Requests\Request<extended>
@@ -20,6 +20,16 @@ class RequestTest extends AbstractTestCase
      * @var Request
      */
     protected $request;
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->request = new Request(Str::random(), Str::random(), []);
+    }
 
     /**
      * @coversNothing
@@ -195,15 +205,5 @@ class RequestTest extends AbstractTestCase
         $this->assertSame($default = function (): void {
             //
         }, $this->request->getParameterByPath(Str::random(), $default));
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->request = new Request(Str::random(), Str::random(), []);
     }
 }

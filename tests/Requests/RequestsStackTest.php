@@ -1,16 +1,16 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace AvtoDev\JsonRpc\Tests\Requests;
 
 use Illuminate\Support\Str;
 use AvtoDev\JsonRpc\Requests\Request;
 use AvtoDev\JsonRpc\Requests\RequestsStack;
+use AvtoDev\JsonRpc\Tests\AbstractTestCase;
 use AvtoDev\JsonRpc\Requests\ErroredRequest;
 use AvtoDev\JsonRpc\Errors\MethodNotFoundError;
 use AvtoDev\JsonRpc\Requests\RequestsStackInterface;
-use AvtoDev\JsonRpc\Tests\AbstractTestCase;
 
 /**
  * @covers \AvtoDev\JsonRpc\Requests\RequestsStack<extended>
@@ -21,6 +21,16 @@ class RequestsStackTest extends AbstractTestCase
      * @var RequestsStack
      */
     protected $instance;
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->instance = $this->instanceFactory();
+    }
 
     /**
      * @return void
@@ -84,16 +94,6 @@ class RequestsStackTest extends AbstractTestCase
     {
         $this->assertTrue((new RequestsStack(true))->isBatch());
         $this->assertFalse((new RequestsStack(false))->isBatch());
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->instance = $this->instanceFactory();
     }
 
     /**

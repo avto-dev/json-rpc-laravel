@@ -1,15 +1,15 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace AvtoDev\JsonRpc\Tests\Requests;
 
 use Illuminate\Support\Str;
 use InvalidArgumentException;
+use AvtoDev\JsonRpc\Tests\AbstractTestCase;
 use AvtoDev\JsonRpc\Requests\ErroredRequest;
 use AvtoDev\JsonRpc\Errors\InvalidParamsError;
 use AvtoDev\JsonRpc\Errors\InvalidRequestError;
-use AvtoDev\JsonRpc\Tests\AbstractTestCase;
 use AvtoDev\JsonRpc\Requests\ErroredRequestInterface;
 
 /**
@@ -21,6 +21,16 @@ class ErroredRequestTest extends AbstractTestCase
      * @var ErroredRequest
      */
     protected $request;
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->request = new ErroredRequest(new InvalidParamsError, Str::random());
+    }
 
     /**
      * @coversNothing
@@ -68,15 +78,5 @@ class ErroredRequestTest extends AbstractTestCase
 
             $this->assertTrue($catch);
         }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->request = new ErroredRequest(new InvalidParamsError, Str::random());
     }
 }

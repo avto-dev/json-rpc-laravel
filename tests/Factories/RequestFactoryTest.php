@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace AvtoDev\JsonRpc\Tests\Factories;
 
@@ -12,6 +12,7 @@ use AvtoDev\JsonRpc\Errors\ParseError;
 use AvtoDev\JsonRpc\Errors\ServerError;
 use AvtoDev\JsonRpc\Errors\InternalError;
 use AvtoDev\JsonRpc\Errors\ErrorInterface;
+use AvtoDev\JsonRpc\Tests\AbstractTestCase;
 use AvtoDev\JsonRpc\Requests\ErroredRequest;
 use AvtoDev\JsonRpc\Responses\ErrorResponse;
 use AvtoDev\JsonRpc\Factories\RequestFactory;
@@ -22,7 +23,6 @@ use AvtoDev\JsonRpc\Errors\InvalidRequestError;
 use AvtoDev\JsonRpc\Errors\MethodNotFoundError;
 use AvtoDev\JsonRpc\Factories\FactoryInterface;
 use AvtoDev\JsonRpc\Responses\ResponseInterface;
-use AvtoDev\JsonRpc\Tests\AbstractTestCase;
 use Symfony\Component\HttpFoundation\Response as HttpResponse;
 
 /**
@@ -34,6 +34,16 @@ class RequestFactoryTest extends AbstractTestCase
      * @var RequestFactory
      */
     protected $factory;
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->factory = $this->app->make(RequestFactory::class);
+    }
 
     /**
      * @coversNothing
@@ -279,15 +289,5 @@ class RequestFactoryTest extends AbstractTestCase
             {
             }
         };
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->factory = $this->app->make(RequestFactory::class);
     }
 }

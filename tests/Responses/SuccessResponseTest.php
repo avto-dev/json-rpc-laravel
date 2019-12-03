@@ -1,13 +1,13 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace AvtoDev\JsonRpc\Tests\Responses;
 
 use Illuminate\Support\Str;
 use InvalidArgumentException;
-use AvtoDev\JsonRpc\Responses\SuccessResponse;
 use AvtoDev\JsonRpc\Tests\AbstractTestCase;
+use AvtoDev\JsonRpc\Responses\SuccessResponse;
 use AvtoDev\JsonRpc\Responses\SuccessResponseInterface;
 
 /**
@@ -19,6 +19,16 @@ class SuccessResponseTest extends AbstractTestCase
      * @var SuccessResponse
      */
     protected $response;
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->response = new SuccessResponse(Str::random(), Str::random());
+    }
 
     /**
      * @return void
@@ -82,15 +92,5 @@ class SuccessResponseTest extends AbstractTestCase
 
             $this->assertTrue($catch);
         }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->response = new SuccessResponse(Str::random(), Str::random());
     }
 }
