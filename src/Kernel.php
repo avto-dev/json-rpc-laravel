@@ -60,11 +60,12 @@ class Kernel implements KernelInterface
             } elseif ($request instanceof RequestInterface) {
                 if ($this->router->methodExists($request->getMethod())) {
                     try {
-                        $result = $this->router->call($request);
+                        $result = $this->router->handle($request);
 
                         if ($request->isNotification() === false) {
                             $responses->push(new SuccessResponse($request->getId(), $result));
                         }
+
                         $this->events->dispatch(new RequestHandledEvent($request));
                     } catch (Throwable $e) {
                         $this->events->dispatch(new RequestHandledExceptionEvent($request, $e));

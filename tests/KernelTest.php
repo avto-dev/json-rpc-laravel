@@ -94,9 +94,6 @@ class KernelTest extends AbstractTestCase
 
         $this->setUpProperties();
 
-        $this->kernel = $this->app->make(Kernel::class);
-        $this->router = $this->app->make(RouterInterface::class);
-
         $this->router->on($method1 = 'foo', static function (): bool {
             return true;
         });
@@ -208,7 +205,7 @@ class KernelTest extends AbstractTestCase
         $this->setUpProperties();
 
         $this->router->on($method = 'foo', function (): void {
-            throw new \RuntimeException;
+            throw new InternalError();
         });
 
         $requests = new RequestsStack(false);
@@ -225,9 +222,9 @@ class KernelTest extends AbstractTestCase
     }
 
     /**
-     * Test batch call with general request.
+     * @throws Exception
      *
-     * @medium
+     * @return void
      */
     public function testBatchCall(): void
     {

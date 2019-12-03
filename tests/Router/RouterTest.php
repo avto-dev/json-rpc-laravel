@@ -76,6 +76,8 @@ class RouterTest extends AbstractTestCase
     }
 
     /**
+     * @throws \Exception
+     *
      * @return void
      */
     public function testActionRegisterFails(): void
@@ -96,10 +98,10 @@ class RouterTest extends AbstractTestCase
     /**
      * @return void
      */
-    public function testCall(): void
+    public function testHandle(): void
     {
         $actions = [
-            'foo'  => function (): bool {
+            'foo'  => static function (): bool {
                 return true;
             },
             'bar'  => static::class . '@someAction',
@@ -113,16 +115,16 @@ class RouterTest extends AbstractTestCase
             $this->router->on($name, $action);
         }
 
-        $this->assertTrue($this->router->call(new Request(Str::random(), 'foo')));
-        $this->assertInstanceOf(Application::class, $this->router->call(new Request(Str::random(), 'bar')));
-        $this->assertSame(123, $this->router->call(new Request(Str::random(), 'baz')));
-        $this->assertInstanceOf(Application::class, $this->router->call(new Request(Str::random(), 'blah')));
+        $this->assertTrue($this->router->handle(new Request(Str::random(), 'foo')));
+        $this->assertInstanceOf(Application::class, $this->router->handle(new Request(Str::random(), 'bar')));
+        $this->assertSame(123, $this->router->handle(new Request(Str::random(), 'baz')));
+        $this->assertInstanceOf(Application::class, $this->router->handle(new Request(Str::random(), 'blah')));
     }
 
     /**
      * @return void
      */
-    public function testCallWithPassingRequestInstance(): void
+    public function testHandleWithPassingRequestInstance(): void
     {
         $executed = false;
 
@@ -150,18 +152,18 @@ class RouterTest extends AbstractTestCase
             return true;
         });
 
-        $this->assertTrue($this->router->call($request));
+        $this->assertTrue($this->router->handle($request));
         $this->assertTrue($executed);
     }
 
     /**
      * @return void
      */
-    public function testCallFails(): void
+    public function testHandleFails(): void
     {
         $this->expectException(InvalidArgumentException::class);
 
-        $this->router->call(new Request(Str::random(), 'foo'));
+        $this->router->handle(new Request(Str::random(), 'foo'));
     }
 
     /**

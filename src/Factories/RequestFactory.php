@@ -143,6 +143,8 @@ class RequestFactory implements FactoryInterface
 
     /**
      * {@inheritdoc}
+     *
+     * @throws JsonEncodeDecodeException
      */
     public function errorToHttpResponse(ErrorResponseInterface $error, int $options = 0): HttpResponse
     {
@@ -155,6 +157,8 @@ class RequestFactory implements FactoryInterface
 
     /**
      * {@inheritdoc}
+     *
+     * @throws JsonEncodeDecodeException
      */
     public function errorResponseToJsonString(ErrorResponseInterface $response, int $options = 0): string
     {
@@ -190,6 +194,8 @@ class RequestFactory implements FactoryInterface
 
     /**
      * {@inheritdoc}
+     *
+     * @throws JsonEncodeDecodeException
      */
     public function responsesToHttpResponse(ResponsesStackInterface $responses, int $options = 0): HttpResponse
     {
@@ -211,6 +217,8 @@ class RequestFactory implements FactoryInterface
 
     /**
      * {@inheritdoc}
+     *
+     * @throws JsonEncodeDecodeException
      */
     public function responsesStackToJsonString(ResponsesStackInterface $stack, int $options = 0): ?string
     {
@@ -238,6 +246,7 @@ class RequestFactory implements FactoryInterface
      * @param int               $options
      *
      * @throws InvalidArgumentException
+     * @throws JsonEncodeDecodeException
      *
      * @return string
      */
@@ -256,6 +265,8 @@ class RequestFactory implements FactoryInterface
 
     /**
      * {@inheritdoc}
+     *
+     * @throws JsonEncodeDecodeException
      */
     public function successResponseToJsonString(SuccessResponseInterface $response, int $options = 0): string
     {

@@ -39,7 +39,7 @@ If you wants to disable package service-provider auto discover, just add into yo
 }
 ```
 
-## Usage
+## Usage example
 
 ### Create routes
 
@@ -63,7 +63,7 @@ Add new route for `RpcController`:
 
 use Illuminate\Support\Facades\Route;
 
-Route::post('/rpc', 'AvtoDev\\JsonRpc\\Http\\Controllers\\RpcController@index');
+Route::post('/rpc', 'AvtoDev\\JsonRpc\\Http\\Controllers\\RpcController');
 ```
 
 > Don't forget about to load RPC routes if you want to specify routes not in the file `./routes/web.php`

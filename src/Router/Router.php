@@ -59,14 +59,14 @@ class Router implements RouterInterface
     /**
      * {@inheritdoc}
      */
-    public function call(RPCRequest $request)
+    public function handle(RPCRequest $request)
     {
         if (! $this->methodExists($method_name = $request->getMethod())) {
             throw new InvalidArgumentException("Method [{$method_name}] does not exists");
         }
 
         // Bind request instance into container
-        $this->container->bind(RPCRequest::class, function () use ($request): ?RPCRequest {
+        $this->container->bind(RPCRequest::class, static function () use ($request): RPCRequest {
             return $request;
         });
 

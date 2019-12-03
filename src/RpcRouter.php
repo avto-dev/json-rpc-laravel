@@ -11,10 +11,11 @@ use AvtoDev\JsonRpc\Requests\RequestInterface as RPCRequest;
 /**
  * @method static void on(string $method_name, $do_action)
  * @method static bool methodExists(string $method_name)
- * @method static mixed call(string $method_name, ?array $params = null, ?RPCRequest $request = null)
+ * @method static mixed call(RPCRequest $request)
  * @method static string[] methods()
  *
- * @see Router
+ * @see \AvtoDev\JsonRpc\Router\RouterInterface
+ * @see \AvtoDev\JsonRpc\Router\Router
  */
 class RpcRouter extends Facade
 {

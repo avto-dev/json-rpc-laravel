@@ -2,11 +2,10 @@
 
 declare(strict_types=1);
 
-namespace AvtoDev\JsonRpc\Tests\Router;
+namespace AvtoDev\JsonRpc\Tests;
 
 use AvtoDev\JsonRpc\RpcRouter;
 use AvtoDev\JsonRpc\Router\RouterInterface;
-use AvtoDev\JsonRpc\Tests\AbstractTestCase;
 
 /**
  * @covers \AvtoDev\JsonRpc\RpcRouter<extended>

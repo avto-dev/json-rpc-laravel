@@ -30,7 +30,7 @@ interface RouterInterface
     public function methodExists(string $method_name): bool;
 
     /**
-     * Make method call.
+     * Handle an RPC request.
      *
      * @param RPCRequest $request
      *
@@ -39,7 +39,7 @@ interface RouterInterface
      *
      * @return mixed
      */
-    public function call(RPCRequest $request);
+    public function handle(RPCRequest $request);
 
     /**
      * Get registered method names.
