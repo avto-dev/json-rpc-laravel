@@ -10,7 +10,9 @@ use AvtoDev\JsonRpc\Kernel;
 use Illuminate\Support\Str;
 use AvtoDev\JsonRpc\KernelInterface;
 use AvtoDev\JsonRpc\Requests\Request;
+use AvtoDev\JsonRpc\Errors\ServerError;
 use AvtoDev\JsonRpc\Errors\InternalError;
+use AvtoDev\JsonRpc\Errors\ErrorInterface;
 use AvtoDev\JsonRpc\Requests\RequestsStack;
 use AvtoDev\JsonRpc\Router\RouterInterface;
 use AvtoDev\JsonRpc\Requests\ErroredRequest;
@@ -85,7 +87,6 @@ class KernelTest extends AbstractTestCase
         $this->doesntExpectEvents([
             ErroredRequestDetectedEvent::class,
             RequestHandledExceptionEvent::class,
-
         ]);
 
         $this->expectsEvents([
@@ -124,7 +125,6 @@ class KernelTest extends AbstractTestCase
     {
         $this->doesntExpectEvents([
             RequestHandledExceptionEvent::class,
-
         ]);
 
         $this->expectsEvents([
@@ -169,7 +169,6 @@ class KernelTest extends AbstractTestCase
             RequestHandledExceptionEvent::class,
             RequestHandledEvent::class,
             ErroredRequestDetectedEvent::class,
-
         ]);
 
         $this->expectsEvents([]);
@@ -266,6 +265,41 @@ class KernelTest extends AbstractTestCase
         $last = $responses->all()[1];
         $this->assertInstanceOf(SuccessResponse::class, $last);
         $this->assertNull($last->getResult());
+    }
+
+    /**
+     * @throws Exception
+     *
+     * @return void
+     */
+    public function testHandleMethodThrowAnException2(): void
+    {
+        $this->doesntExpectEvents([
+            RequestHandledEvent::class,
+            ErroredRequestDetectedEvent::class,
+        ]);
+
+        $this->expectsEvents([
+            RequestHandledExceptionEvent::class,
+        ]);
+
+        $this->setUpProperties();
+
+        $this->router->on($method = 'foo', function (): void {
+            throw new ServerError;
+        });
+
+        $responses = $this->kernel->handle(new RequestsStack(
+            false,
+            [new Request($id = Str::random(), $method, null, new stdClass)]
+        ));
+
+        $this->assertCount(1, $responses);
+
+        /** @var ErrorResponse $first */
+        $first = $responses->first();
+        $this->assertInstanceOf(ErrorResponse::class, $first);
+        $this->assertInstanceOf(ErrorInterface::class, $first->getError());
     }
 
     /**
