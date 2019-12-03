@@ -44,6 +44,18 @@ class KernelTest extends AbstractTestCase
     {
         parent::setUp();
 
+        $this->setUpProperties();
+    }
+
+    /**
+     * For event testing we should call this method after `$this->expectsEvents` calling.
+     *
+     * @link https://stackoverflow.com/a/37840188/2252921
+     *
+     * @return void
+     */
+    private function setUpProperties(): void
+    {
         $this->kernel = $this->app->make(Kernel::class);
         $this->router = $this->app->make(RouterInterface::class);
     }
@@ -66,6 +78,8 @@ class KernelTest extends AbstractTestCase
             RequestHandledEvent::class,
             RequestHandledExceptionEvent::class,
         ]);
+
+        $this->setUpProperties();
 
         $this->assertEmpty($responses = $this->kernel->handle(new RequestsStack(true)));
         $this->assertTrue($responses->isBatch());
@@ -90,6 +104,11 @@ class KernelTest extends AbstractTestCase
         $this->expectsEvents([
             RequestHandledEvent::class,
         ]);
+
+        $this->setUpProperties();
+
+        $this->kernel = $this->app->make(Kernel::class);
+        $this->router = $this->app->make(RouterInterface::class);
 
         $this->router->on($method1 = 'foo', static function (): bool {
             return true;
@@ -126,6 +145,8 @@ class KernelTest extends AbstractTestCase
             RequestHandledEvent::class,
         ]);
 
+        $this->setUpProperties();
+
         $this->router->on($method = 'foo', function (): bool {
             return true;
         });
@@ -160,12 +181,13 @@ class KernelTest extends AbstractTestCase
         $this->doesntExpectEvents([
             RequestHandledExceptionEvent::class,
             RequestHandledEvent::class,
-
-        ]);
-
-        $this->expectsEvents([
             ErroredRequestDetectedEvent::class,
+
         ]);
+
+        $this->expectsEvents([]);
+
+        $this->setUpProperties();
 
         $requests = new RequestsStack(true);
         $requests->push(new Request($id = Str::random(), Str::random(), null, new stdClass));
@@ -188,14 +210,15 @@ class KernelTest extends AbstractTestCase
     public function testHandleMethodThrowAnException(): void
     {
         $this->doesntExpectEvents([
-            RequestHandledExceptionEvent::class,
             RequestHandledEvent::class,
-
+            ErroredRequestDetectedEvent::class,
         ]);
 
         $this->expectsEvents([
-            ErroredRequestDetectedEvent::class,
+            RequestHandledExceptionEvent::class,
         ]);
+
+        $this->setUpProperties();
 
         $this->router->on($method = 'foo', function (): void {
             throw new \RuntimeException;
@@ -229,6 +252,8 @@ class KernelTest extends AbstractTestCase
         $this->expectsEvents([
             RequestHandledEvent::class,
         ]);
+
+        $this->setUpProperties();
 
         $this->router->on($name = 'foo', function (BaseMethodParametersStub $parameters): ?string {
             return $parameters->getId();
