@@ -99,7 +99,7 @@ class Kernel implements KernelInterface
             function (MethodParametersInterface $parameters) use ($container): void {
                 $request = $container->make(RPCRequest::class);
 
-                if ($request instanceof RPCRequest) {
+                if ($request instanceof RPCRequest) {// @todo: Make test for this condition
                     $parameters->parse($request->getParams());
                 }
             }
@@ -145,14 +145,16 @@ class Kernel implements KernelInterface
     {
         $this->events->dispatch(new RequestHandledExceptionEvent($request, $e));
 
-        $responses->push(
-            new ErrorResponse(
-                $request->getId(),
-                $e instanceof ErrorInterface
-                    ? $e
-                    : new InternalError(null, (int) $e->getCode(), $e, $e)
-            )
-        );
+        if ($request->isNotification() === false) {
+            $responses->push(
+                new ErrorResponse(
+                    $request->getId(),
+                    $e instanceof ErrorInterface
+                        ? $e
+                        : new InternalError(null, (int) $e->getCode(), $e, $e)
+                )
+            );
+        }
     }
 
     /**

@@ -10,6 +10,7 @@ use AvtoDev\JsonRpc\Kernel;
 use Illuminate\Support\Str;
 use AvtoDev\JsonRpc\KernelInterface;
 use AvtoDev\JsonRpc\Requests\Request;
+use AvtoDev\JsonRpc\Errors\ServerError;
 use AvtoDev\JsonRpc\Errors\InternalError;
 use AvtoDev\JsonRpc\Requests\RequestsStack;
 use AvtoDev\JsonRpc\Router\RouterInterface;
@@ -205,7 +206,7 @@ class KernelTest extends AbstractTestCase
         $this->setUpProperties();
 
         $this->router->on($method = 'foo', function (): void {
-            throw new InternalError();
+            throw new InternalError;
         });
 
         $requests = new RequestsStack(false);
@@ -263,6 +264,46 @@ class KernelTest extends AbstractTestCase
         $last = $responses->all()[1];
         $this->assertInstanceOf(SuccessResponse::class, $last);
         $this->assertNull($last->getResult());
+    }
+
+    /**
+     * @throws Exception
+     *
+     * @return void
+     */
+    public function testBatchCall2(): void
+    {
+        $this->doesntExpectEvents([
+            RequestHandledEvent::class,
+            ErroredRequestDetectedEvent::class,
+        ]);
+
+        $this->expectsEvents([
+            RequestHandledExceptionEvent::class,
+        ]);
+
+        $this->setUpProperties();
+
+        $this->router->on($name = 'foo', function (): ?string {
+            throw new ServerError('foo error');
+        });
+
+        $requests_stack = new RequestsStack(true);
+
+        $requests_stack->push(
+            new Request($first_request_id = Str::random(), $name, ['id' => Str::random()])
+        );
+
+        $requests_stack->push(new Request(null, $name, []));
+
+        $responses = $this->kernel->handle($requests_stack);
+        $this->assertTrue($responses->isBatch());
+        $this->assertSame(1, $responses->count());
+        /** @var ErrorResponse $response */
+        $response = $responses->first();
+        $this->assertInstanceOf(ErrorResponse::class, $response);
+        $this->assertSame($first_request_id, $response->getId());
+        $this->assertSame('foo error', $response->getError()->getMessage());
     }
 
     /**

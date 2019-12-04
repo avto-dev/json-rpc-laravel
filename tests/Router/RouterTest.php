@@ -13,7 +13,7 @@ use AvtoDev\JsonRpc\Router\RouterInterface;
 use AvtoDev\JsonRpc\Tests\AbstractTestCase;
 use Illuminate\Contracts\Foundation\Application;
 use AvtoDev\JsonRpc\MethodParameters\BaseMethodParameters;
-use AvtoDev\JsonRpc\MethodParameters\MethodParametersInterface;
+use AvtoDev\JsonRpc\Requests\RequestInterface as RPCRequest;
 
 /**
  * @group  router
@@ -133,8 +133,8 @@ class RouterTest extends AbstractTestCase
         ]);
 
         $this->app->instance(
-            MethodParametersInterface::class,
-            m::mock(MethodParametersInterface::class)
+            BaseMethodParameters::class,
+            m::mock(BaseMethodParameters::class)
                 ->shouldReceive('getParams')
                 ->andReturnUsing(function () use ($params) {
                     return $params;
@@ -142,10 +142,16 @@ class RouterTest extends AbstractTestCase
                 ->getMock()
         );
 
+        $this->app->bind(RPCRequest::class, function () use ($request): RPCRequest {
+            return $request;
+        });
+
         $this->router->on($method,
-            $action = function (BaseMethodParameters $parameters) use (&$executed, $request): bool {
+            $action = function (BaseMethodParameters $parameters,
+                                RPCRequest $got_request) use (&$executed, $request): bool {
                 $executed = true;
 
+                $this->assertSame($request, $got_request);
                 $this->assertSame($request->getParams(), $parameters->getParams());
 
                 return true;
