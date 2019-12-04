@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace AvtoDev\JsonRpc;
 
@@ -9,8 +9,8 @@ use AvtoDev\JsonRpc\Errors\InternalError;
 use AvtoDev\JsonRpc\Errors\ErrorInterface;
 use AvtoDev\JsonRpc\Router\RouterInterface;
 use AvtoDev\JsonRpc\Responses\ErrorResponse;
-use Illuminate\Contracts\Container\Container;
 use AvtoDev\JsonRpc\Responses\ResponsesStack;
+use Illuminate\Contracts\Container\Container;
 use AvtoDev\JsonRpc\Requests\RequestInterface;
 use AvtoDev\JsonRpc\Responses\SuccessResponse;
 use AvtoDev\JsonRpc\Errors\MethodNotFoundError;
@@ -21,8 +21,8 @@ use AvtoDev\JsonRpc\Responses\ResponsesStackInterface;
 use AvtoDev\JsonRpc\Events\ErroredRequestDetectedEvent;
 use AvtoDev\JsonRpc\Events\RequestHandledExceptionEvent;
 use AvtoDev\JsonRpc\Requests\RequestInterface as RPCRequest;
-use Illuminate\Contracts\Events\Dispatcher as EventsDispatcher;
 use AvtoDev\JsonRpc\MethodParameters\MethodParametersInterface;
+use Illuminate\Contracts\Events\Dispatcher as EventsDispatcher;
 
 class Kernel implements KernelInterface
 {
@@ -142,7 +142,6 @@ class Kernel implements KernelInterface
     protected function catchErrorOnHandle(RequestInterface $request,
                                           ResponsesStackInterface $responses,
                                           Throwable $e): void
-
     {
         $this->events->dispatch(new RequestHandledExceptionEvent($request, $e));
 
