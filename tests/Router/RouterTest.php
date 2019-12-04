@@ -14,9 +14,9 @@ use AvtoDev\JsonRpc\Tests\AbstractTestCase;
 use Illuminate\Contracts\Foundation\Application;
 use AvtoDev\JsonRpc\MethodParameters\BaseMethodParameters;
 use AvtoDev\JsonRpc\Requests\RequestInterface as RPCRequest;
-use AvtoDev\JsonRpc\MethodParameters\MethodParametersInterface;
 
 /**
+ * @group  router
  * @covers \AvtoDev\JsonRpc\Router\Router<extended>
  */
 class RouterTest extends AbstractTestCase
@@ -115,10 +115,10 @@ class RouterTest extends AbstractTestCase
             $this->router->on($name, $action);
         }
 
-        $this->assertTrue($this->router->handle(new Request(Str::random(), 'foo')));
-        $this->assertInstanceOf(Application::class, $this->router->handle(new Request(Str::random(), 'bar')));
-        $this->assertSame(123, $this->router->handle(new Request(Str::random(), 'baz')));
-        $this->assertInstanceOf(Application::class, $this->router->handle(new Request(Str::random(), 'blah')));
+        $this->assertTrue($this->router->call('foo'));
+        $this->assertInstanceOf(Application::class, $this->router->call('bar'));
+        $this->assertSame(123, $this->router->call('baz'));
+        $this->assertInstanceOf(Application::class, $this->router->call('blah'));
     }
 
     /**
@@ -133,8 +133,8 @@ class RouterTest extends AbstractTestCase
         ]);
 
         $this->app->instance(
-            MethodParametersInterface::class,
-            m::mock(MethodParametersInterface::class)
+            BaseMethodParameters::class,
+            m::mock(BaseMethodParameters::class)
                 ->shouldReceive('getParams')
                 ->andReturnUsing(function () use ($params) {
                     return $params;
@@ -142,17 +142,22 @@ class RouterTest extends AbstractTestCase
                 ->getMock()
         );
 
-        $this->router->on($method, $action = function (BaseMethodParameters $parameters,
-                                                       RPCRequest $got_request) use (&$executed, $request): bool {
-            $executed = true;
-
-            $this->assertSame($request, $got_request);
-            $this->assertSame($request->getParams(), $parameters->getParams());
-
-            return true;
+        $this->app->bind(RPCRequest::class, function () use ($request): RPCRequest {
+            return $request;
         });
 
-        $this->assertTrue($this->router->handle($request));
+        $this->router->on($method,
+            $action = function (BaseMethodParameters $parameters,
+                                RPCRequest $got_request) use (&$executed, $request): bool {
+                $executed = true;
+
+                $this->assertSame($request, $got_request);
+                $this->assertSame($request->getParams(), $parameters->getParams());
+
+                return true;
+            });
+
+        $this->assertTrue($this->router->call($method));
         $this->assertTrue($executed);
     }
 
@@ -163,7 +168,7 @@ class RouterTest extends AbstractTestCase
     {
         $this->expectException(InvalidArgumentException::class);
 
-        $this->router->handle(new Request(Str::random(), 'foo'));
+        $this->router->call('foo');
     }
 
     /**

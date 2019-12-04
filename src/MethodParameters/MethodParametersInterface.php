@@ -3,7 +3,7 @@
 namespace AvtoDev\JsonRpc\MethodParameters;
 
 /**
- * @see \AvtoDev\JsonRpc\Router\Router::handle
+ * @see \AvtoDev\JsonRpc\Router\Router::call
  *
  * DI is allowed in constructors.
  */

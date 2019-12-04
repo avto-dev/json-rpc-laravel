@@ -2,9 +2,8 @@
 
 namespace AvtoDev\JsonRpc\Router;
 
-use RuntimeException;
+use Exception;
 use InvalidArgumentException;
-use AvtoDev\JsonRpc\Requests\RequestInterface as RPCRequest;
 
 interface RouterInterface
 {
@@ -32,14 +31,13 @@ interface RouterInterface
     /**
      * Handle an RPC request.
      *
-     * @param RPCRequest $request
+     * @param string $method_name
      *
-     * @throws RuntimeException
-     * @throws InvalidArgumentException
+     * @throws Exception
      *
      * @return mixed
      */
-    public function handle(RPCRequest $request);
+    public function call(string $method_name);
 
     /**
      * Get registered method names.

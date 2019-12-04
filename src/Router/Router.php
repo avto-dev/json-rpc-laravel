@@ -7,8 +7,6 @@ namespace AvtoDev\JsonRpc\Router;
 use Closure;
 use InvalidArgumentException;
 use Illuminate\Contracts\Container\Container;
-use AvtoDev\JsonRpc\Requests\RequestInterface as RPCRequest;
-use AvtoDev\JsonRpc\MethodParameters\MethodParametersInterface as ParametersInterface;
 
 class Router implements RouterInterface
 {
@@ -30,14 +28,6 @@ class Router implements RouterInterface
     public function __construct(Container $container)
     {
         $this->container = $container;
-
-        $this->container->resolving(ParametersInterface::class, function (ParametersInterface $parameters): void {
-            $request = $this->container->make(RPCRequest::class);
-
-            if ($request instanceof RPCRequest) {
-                $parameters->parse($request->getParams());
-            }
-        });
     }
 
     /**
@@ -59,19 +49,14 @@ class Router implements RouterInterface
     /**
      * {@inheritdoc}
      */
-    public function handle(RPCRequest $request)
+    public function call(string $method_name)
     {
-        if (! $this->methodExists($method_name = $request->getMethod())) {
+        if (! $this->methodExists($method_name)) {
             throw new InvalidArgumentException("Method [{$method_name}] does not exists");
         }
 
-        // Bind request instance into container
-        $this->container->bind(RPCRequest::class, static function () use ($request): RPCRequest {
-            return $request;
-        });
-
         // Make method calling
-        return $this->container->call($this->map[$request->getMethod()]);
+        return $this->container->call($this->map[$method_name]);
     }
 
     /**

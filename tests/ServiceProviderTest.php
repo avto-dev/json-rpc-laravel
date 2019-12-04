@@ -2,13 +2,12 @@
 
 declare(strict_types=1);
 
-namespace AvtoDev\JsonRpc\Tests\Avtodev\JsonRpc;
+namespace AvtoDev\JsonRpc\Tests;
 
 use AvtoDev\JsonRpc\Kernel;
 use AvtoDev\JsonRpc\Router\Router;
 use AvtoDev\JsonRpc\KernelInterface;
 use AvtoDev\JsonRpc\Router\RouterInterface;
-use AvtoDev\JsonRpc\Tests\AbstractTestCase;
 use AvtoDev\JsonRpc\Factories\RequestFactory;
 use AvtoDev\JsonRpc\Factories\FactoryInterface;
 

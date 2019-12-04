@@ -37,7 +37,7 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
      */
     protected function registerJsonRpcRequestsFactory(): void
     {
-        $this->app->bind(FactoryInterface::class, RequestFactory::class);
+        $this->app->bindIf(FactoryInterface::class, RequestFactory::class);
     }
 
     /**
@@ -47,7 +47,9 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
      */
     protected function registerRpcKernel(): void
     {
-        $this->app->singleton(KernelInterface::class, Kernel::class);
+        if (! $this->app->bound(KernelInterface::class)) {
+            $this->app->singleton(KernelInterface::class, Kernel::class);
+        }
     }
 
     /**
@@ -57,6 +59,8 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
      */
     protected function registerRpcRouter(): void
     {
-        $this->app->singleton(RouterInterface::class, Router::class);
+        if (! $this->app->bound(RouterInterface::class)) {
+            $this->app->singleton(RouterInterface::class, Router::class);
+        }
     }
 }
