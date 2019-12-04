@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace AvtoDev\JsonRpc;
 
@@ -37,7 +37,7 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
      */
     protected function registerJsonRpcRequestsFactory(): void
     {
-        $this->app->bind(FactoryInterface::class, RequestFactory::class);
+        $this->app->bindIf(FactoryInterface::class, RequestFactory::class);
     }
 
     /**
@@ -47,7 +47,7 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
      */
     protected function registerRpcKernel(): void
     {
-        $this->app->singleton(KernelInterface::class, Kernel::class);
+        $this->app->singletonIf(KernelInterface::class, Kernel::class);
     }
 
     /**
@@ -57,6 +57,6 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
      */
     protected function registerRpcRouter(): void
     {
-        $this->app->singleton(RouterInterface::class, Router::class);
+        $this->app->singletonIf(RouterInterface::class, Router::class);
     }
 }
