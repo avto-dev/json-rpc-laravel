@@ -47,9 +47,7 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
      */
     protected function registerRpcKernel(): void
     {
-        if (! $this->app->bound(KernelInterface::class)) {
-            $this->app->singleton(KernelInterface::class, Kernel::class);
-        }
+        $this->app->singleton(KernelInterface::class, Kernel::class);
     }
 
     /**
@@ -59,8 +57,6 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
      */
     protected function registerRpcRouter(): void
     {
-        if (! $this->app->bound(RouterInterface::class)) {
-            $this->app->singleton(RouterInterface::class, Router::class);
-        }
+        $this->app->singleton(RouterInterface::class, Router::class);
     }
 }
