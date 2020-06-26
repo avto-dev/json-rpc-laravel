@@ -4,6 +4,21 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog][keepachangelog] and this project adheres to [Semantic Versioning][semver].
 
+## v2.0.0
+
+### Changed
+
+- Maximal `illuminate/*` packages version now is `7.*`
+- Minimal required PHP version now is `7.2`
+- Classes `RequestsStack` and `ResponsesStack` do not extend `Illuminate\Support\Collection`
+- Interfaces `RequestsStackInterface` and `ResponsesStackInterface` do not extend `Illuminate\Contracts\Support\Arrayable`
+- Method `push()` in `RequestsStack` and `ResponsesStack` return `void` now
+
+### Added
+
+- Methods `all()`, `getIterator()`, `count()`, `isEmpty()`, `isNotEmpty()` and `first()` implementation in `RequestsStack` and `ResponsesStack` classes
+- Type-hints for methods in `RequestsStackInterface` and `ResponsesStackInterface` interfaces
+
 ## v1.2.0
 
 ### Changed

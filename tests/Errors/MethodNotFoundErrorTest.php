@@ -16,7 +16,8 @@ class MethodNotFoundErrorTest extends AbstractErrorTestCase
      */
     public function testDefaultMessage(): void
     {
-        $this->assertSame('Method not found', $this->errorFactory(null)->getMessage());
+        $this->assertSame('Method not found', ($error = $this->errorFactory(null))->getMessage());
+        $this->assertInstanceOf(MethodNotFoundError::class, $error);
     }
 
     /**

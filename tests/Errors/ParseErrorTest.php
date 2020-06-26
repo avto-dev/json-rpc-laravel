@@ -16,7 +16,8 @@ class ParseErrorTest extends AbstractErrorTestCase
      */
     public function testDefaultMessage(): void
     {
-        $this->assertSame('Parse error', $this->errorFactory(null)->getMessage());
+        $this->assertSame('Parse error', ($error = $this->errorFactory(null))->getMessage());
+        $this->assertInstanceOf(ParseError::class, $error);
     }
 
     /**

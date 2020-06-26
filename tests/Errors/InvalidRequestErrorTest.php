@@ -16,7 +16,8 @@ class InvalidRequestErrorTest extends AbstractErrorTestCase
      */
     public function testDefaultMessage(): void
     {
-        $this->assertSame('Invalid Request', $this->errorFactory(null)->getMessage());
+        $this->assertSame('Invalid Request', ($error = $this->errorFactory(null))->getMessage());
+        $this->assertInstanceOf(InvalidRequestError::class, $error);
     }
 
     /**

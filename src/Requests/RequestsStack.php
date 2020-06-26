@@ -4,9 +4,10 @@ declare(strict_types = 1);
 
 namespace AvtoDev\JsonRpc\Requests;
 
-use Illuminate\Support\Collection;
+use ArrayIterator;
+use LogicException;
 
-class RequestsStack extends Collection implements RequestsStackInterface
+class RequestsStack implements RequestsStackInterface
 {
     /**
      * @var bool
@@ -14,11 +15,9 @@ class RequestsStack extends Collection implements RequestsStackInterface
     protected $is_batch;
 
     /**
-     * The items contained in the stack.
-     *
      * @var array<ErroredRequestInterface|RequestInterface>
      */
-    protected $items = [];
+    protected $requests = [];
 
     /**
      * RequestsStack constructor.
@@ -29,26 +28,30 @@ class RequestsStack extends Collection implements RequestsStackInterface
     public function __construct(bool $is_batch, array $requests = [])
     {
         $this->is_batch = $is_batch;
-
-        parent::__construct($requests);
+        $this->requests = $requests;
     }
 
     /**
-     * Push request into stack.
-     *
-     * @param ErroredRequestInterface|RequestInterface $request
+     * @param bool                                            $is_batch
+     * @param array<ErroredRequestInterface|RequestInterface> $requests
      *
      * @return self<ErroredRequestInterface|RequestInterface>
      */
-    public function push($request): self
+    public static function make(bool $is_batch, array $requests = []): self
+    {
+        return new self($is_batch, $requests);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function push($request): void
     {
         if ($request instanceof RequestInterface) {
-            $this->items[] = $request;
+            $this->requests[] = $request;
         } elseif ($request instanceof ErroredRequestInterface) {
-            $this->items[] = $request;
+            $this->requests[] = $request;
         }
-
-        return $this;
     }
 
     /**
@@ -57,5 +60,61 @@ class RequestsStack extends Collection implements RequestsStackInterface
     public function isBatch(): bool
     {
         return $this->is_batch;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function all(): array
+    {
+        return $this->requests;
+    }
+
+    /**
+     * @return ArrayIterator<int, ErroredRequestInterface|RequestInterface>
+     */
+    public function getIterator(): ArrayIterator
+    {
+        return new ArrayIterator($this->requests);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function count(): int
+    {
+        return count($this->requests);
+    }
+
+    /**
+     * Determine if stack is empty.
+     *
+     * @return bool
+     */
+    public function isEmpty(): bool
+    {
+        return empty($this->requests);
+    }
+
+    /**
+     * Determine if stack is not empty.
+     *
+     * @return bool
+     */
+    public function isNotEmpty(): bool
+    {
+        return ! $this->isEmpty();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function first()
+    {
+        if (\count($this->requests) === 0) {
+            throw new LogicException('Stack is empty');
+        }
+
+        return \reset($this->requests);
     }
 }

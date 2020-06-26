@@ -16,7 +16,8 @@ class ServerErrorTest extends AbstractErrorTestCase
      */
     public function testDefaultMessage(): void
     {
-        $this->assertSame('Server Error', $this->errorFactory(null)->getMessage());
+        $this->assertSame('Server Error', ($error = $this->errorFactory(null))->getMessage());
+        $this->assertInstanceOf(ServerError::class, $error);
     }
 
     /**

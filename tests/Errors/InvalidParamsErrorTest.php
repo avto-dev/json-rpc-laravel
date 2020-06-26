@@ -16,7 +16,8 @@ class InvalidParamsErrorTest extends AbstractErrorTestCase
      */
     public function testDefaultMessage(): void
     {
-        $this->assertSame('Invalid params', $this->errorFactory(null)->getMessage());
+        $this->assertSame('Invalid params', ($error = $this->errorFactory(null))->getMessage());
+        $this->assertInstanceOf(InvalidParamsError::class, $error);
     }
 
     /**
