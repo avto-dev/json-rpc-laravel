@@ -10,6 +10,8 @@ The format is based on [Keep a Changelog][keepachangelog] and this project adher
 
 - CI completely moved from "Travis CI" to "Github Actions" _(travis builds disabled)_
 - Minimal required PHP version now is `7.2`
+- Minimal required `phpunit/phpunit` version now is `~7.5`
+- `phpstan/phpstan` updated up to `^0.12`
 
 ### Added
 
