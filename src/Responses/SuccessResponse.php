@@ -21,7 +21,7 @@ class SuccessResponse implements SuccessResponseInterface
     /**
      * Response result data.
      *
-     * @var array|bool|float|int|object|string
+     * @var array<mixed>|bool|float|int|object|string
      */
     protected $result;
 

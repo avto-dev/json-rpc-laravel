@@ -16,7 +16,7 @@ class Router implements RouterInterface
     protected $container;
 
     /**
-     * @var callable[]|string[]
+     * @var array<callable|string>
      */
     protected $map = [];
 

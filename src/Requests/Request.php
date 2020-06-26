@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace AvtoDev\JsonRpc\Requests;
 
@@ -22,7 +22,7 @@ class Request implements RequestInterface
     protected $method;
 
     /**
-     * @var array|object|null
+     * @var array<mixed>|object|null
      */
     protected $params;
 
@@ -34,10 +34,10 @@ class Request implements RequestInterface
     /**
      * Request constructor.
      *
-     * @param int|string|null   $id     Request identifier
-     * @param string            $method Requested method name
-     * @param array|object|null $params Request parameters
-     * @param object|null       $raw    Raw request interpretation
+     * @param int|string|null          $id     Request identifier
+     * @param string                   $method Requested method name
+     * @param array<mixed>|object|null $params Request parameters
+     * @param object|null              $raw    Raw request interpretation
      *
      * @throws InvalidArgumentException If passed not valid arguments
      */
@@ -81,7 +81,7 @@ class Request implements RequestInterface
      */
     public function getParameterByPath(string $path, $default = null, string $delimiter = '.')
     {
-        return \array_reduce((array) \explode($delimiter, $path), function ($carry, $item) use (&$default) {
+        return \array_reduce((array) \explode($delimiter, $path), static function ($carry, $item) use (&$default) {
             return \is_numeric($item) || \is_array($carry)
                 ? ($carry[$item] ?? $default)
                 : ($carry->$item ?? $default);

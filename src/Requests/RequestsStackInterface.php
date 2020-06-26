@@ -9,6 +9,8 @@ use Illuminate\Contracts\Support\Arrayable;
 
 /**
  * @see RequestsStack
+ *
+ * @extends IteratorAggregate<ErroredRequestInterface|RequestInterface>
  */
 interface RequestsStackInterface extends Countable, Arrayable, IteratorAggregate
 {
@@ -16,6 +18,8 @@ interface RequestsStackInterface extends Countable, Arrayable, IteratorAggregate
      * Push request into stack.
      *
      * @param ErroredRequestInterface|RequestInterface $request
+     *
+     * @return mixed
      */
     public function push($request);
 
@@ -27,7 +31,7 @@ interface RequestsStackInterface extends Countable, Arrayable, IteratorAggregate
     public function first();
 
     /**
-     * @return mixed[]
+     * @return array<mixed>
      */
     public function all();
 

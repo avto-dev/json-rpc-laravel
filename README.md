@@ -5,13 +5,13 @@
 # JSON-RPC 2.0
 
 [![Version][badge_packagist_version]][link_packagist]
-[![Version][badge_php_version]][link_packagist]
+[![PHP Version][badge_php_version]][link_packagist]
 [![Build Status][badge_build_status]][link_build_status]
 [![Coverage][badge_coverage]][link_coverage]
 [![Downloads count][badge_downloads_count]][link_packagist]
 [![License][badge_license]][link_license]
 
-[JSON-RPC 2.0] is a remote procedure call protocol encoded in JSON. It is a very simple protocol, defining only a few data types and commands. JSON-RPC allows for notifications (data sent to the server that does not require a response) and for multiple calls to be sent to the server which may be answered out of order. 
+[JSON-RPC 2.0] is a remote procedure call protocol encoded in JSON. It is a very simple protocol, defining only a few data types and commands. JSON-RPC allows for notifications (data sent to the server that does not require a response) and for multiple calls to be sent to the server which may be answered out of order.
 
 ## Install
 
@@ -24,20 +24,6 @@ $ composer require avto-dev/json-rpc-laravel "^1.0"
 > Installed `composer` is required ([how to install composer][getcomposer]).
 
 > You need to fix the major version of package.
-
-If you wants to disable package service-provider auto discover, just add into your `composer.json` next lines:
-
-```json
-{
-    "extra": {
-        "laravel": {
-            "dont-discover": [
-                "avto-dev/json-rpc-laravel"
-            ]
-        }
-    }
-}
-```
 
 ## Usage example
 
@@ -52,7 +38,7 @@ use AvtoDev\JsonRPC\RpcRouter;
 
 RpcRouter::on('please_sum_array_values', 'YourNamespace\\SomeController@sum');
 RpcRouter::on('show_full_request', 'YourNamespace\\SomeController@showInfo');
-``` 
+```
 
 > This package already contains a [simple controller](./src/Http/Controllers/RpcController.php) implementation, which you can expand it or take it only as an example.
 
@@ -92,7 +78,7 @@ class SomeController
     {
         return (int) \array_sum($request->getParams());
     }
-    
+
     /**
      * Get info from request.
      *
@@ -167,7 +153,7 @@ Event class                     | Description
 `ErroredRequestDetectedEvent`   | Detected not valid request from stack
 `RequestHandledEvent`           | Means the remote method was successfully called
 `RequestHandledExceptionEvent`  | An exception was thrown while executing the request
- 
+
 If necessary, you can create a **Listener** on this **event** and display received messages for debug.
 
 The `EventServiceProvider` included with your [Laravel application](https://laravel.com/docs/events) provides a convenient place to register all of your application's event listeners.
@@ -193,7 +179,7 @@ This is open-sourced software licensed under the [MIT License][link_license].
 
 [badge_packagist_version]:https://img.shields.io/packagist/v/avto-dev/json-rpc-laravel.svg?maxAge=180
 [badge_php_version]:https://img.shields.io/packagist/php-v/avto-dev/json-rpc-laravel.svg?longCache=true
-[badge_build_status]:https://travis-ci.org/avto-dev/json-rpc-laravel.svg?branch=master
+[badge_build_status]:https://img.shields.io/github/workflow/status/avto-dev/json-rpc-laravel/tests/master
 [badge_coverage]:https://img.shields.io/codecov/c/github/avto-dev/json-rpc-laravel/master.svg?maxAge=60
 [badge_downloads_count]:https://img.shields.io/packagist/dt/avto-dev/json-rpc-laravel.svg?maxAge=180
 [badge_license]:https://img.shields.io/packagist/l/avto-dev/json-rpc-laravel.svg?longCache=true

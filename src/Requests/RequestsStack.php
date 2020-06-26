@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace AvtoDev\JsonRpc\Requests;
 
@@ -16,15 +16,15 @@ class RequestsStack extends Collection implements RequestsStackInterface
     /**
      * The items contained in the stack.
      *
-     * @var ErroredRequestInterface[]|RequestInterface[]
+     * @var array<ErroredRequestInterface|RequestInterface>
      */
     protected $items = [];
 
     /**
      * RequestsStack constructor.
      *
-     * @param bool                                         $is_batch
-     * @param ErroredRequestInterface[]|RequestInterface[] $requests
+     * @param bool                                            $is_batch
+     * @param array<ErroredRequestInterface|RequestInterface> $requests
      */
     public function __construct(bool $is_batch, array $requests = [])
     {
@@ -38,7 +38,7 @@ class RequestsStack extends Collection implements RequestsStackInterface
      *
      * @param ErroredRequestInterface|RequestInterface $request
      *
-     * @return $this
+     * @return self<ErroredRequestInterface|RequestInterface>
      */
     public function push($request): self
     {

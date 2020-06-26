@@ -16,8 +16,8 @@ class ResponsesStack extends Collection implements ResponsesStackInterface
     /**
      * ResponsesStack constructor.
      *
-     * @param bool                $is_batch
-     * @param ResponseInterface[] $responses
+     * @param bool                     $is_batch
+     * @param array<ResponseInterface> $responses
      */
     public function __construct(bool $is_batch, array $responses = [])
     {
@@ -31,7 +31,7 @@ class ResponsesStack extends Collection implements ResponsesStackInterface
      *
      * @param ResponseInterface $response
      *
-     * @return $this
+     * @return self<ResponseInterface>
      */
     public function push($response): self
     {
