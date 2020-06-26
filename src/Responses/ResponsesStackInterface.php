@@ -9,6 +9,8 @@ use Illuminate\Contracts\Support\Arrayable;
 
 /**
  * @see ResponsesStack
+ *
+ * @extends IteratorAggregate<ResponseInterface>
  */
 interface ResponsesStackInterface extends Countable, Arrayable, IteratorAggregate
 {
@@ -17,7 +19,7 @@ interface ResponsesStackInterface extends Countable, Arrayable, IteratorAggregat
      *
      * @param ResponseInterface $response
      *
-     * @return $this
+     * @return $this<ResponseInterface>
      */
     public function push($response);
 
@@ -29,7 +31,7 @@ interface ResponsesStackInterface extends Countable, Arrayable, IteratorAggregat
     public function first();
 
     /**
-     * @return array|ResponseInterface[]
+     * @return ResponseInterface[]
      */
     public function all();
 

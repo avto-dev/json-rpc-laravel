@@ -14,7 +14,7 @@ interface MethodParametersInterface
      *
      * IMPORTANT: This method will be called automatically by RPC router before injecting into controller.
      *
-     * @param array|object|null $params
+     * @param array<mixed>|object|null $params
      *
      * @return void
      */

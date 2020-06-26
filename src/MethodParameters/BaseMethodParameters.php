@@ -11,7 +11,7 @@ class BaseMethodParameters implements MethodParametersInterface
     use ValidateNonStrictValuesTrait;
 
     /**
-     * @var array|object|null
+     * @var array<mixed>|object|null
      */
     protected $params;
 
@@ -26,7 +26,7 @@ class BaseMethodParameters implements MethodParametersInterface
     }
 
     /**
-     * @return array|object|null
+     * @return array<mixed>|object|null
      */
     public function getParams()
     {

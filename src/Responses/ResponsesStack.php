@@ -31,7 +31,7 @@ class ResponsesStack extends Collection implements ResponsesStackInterface
      *
      * @param ResponseInterface $response
      *
-     * @return $this
+     * @return self<ResponseInterface>
      */
     public function push($response): self
     {

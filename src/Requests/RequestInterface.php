@@ -17,7 +17,7 @@ interface RequestInterface extends BasicRequestInterface
     /**
      * Get request parameters.
      *
-     * @return array|object|null
+     * @return array<mixed>|object|null
      */
     public function getParams();
 
@@ -28,7 +28,7 @@ interface RequestInterface extends BasicRequestInterface
      * @param mixed  $default
      * @param string $delimiter Dot `.` by default
      *
-     * @return array|bool|float|int|object|string|null Or mixed (passed in $default)
+     * @return array<mixed>|bool|float|int|object|string|null Or mixed (passed in $default)
      */
     public function getParameterByPath(string $path, $default = null, string $delimiter = '.');
 
