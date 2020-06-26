@@ -8,9 +8,15 @@ The format is based on [Keep a Changelog][keepachangelog] and this project adher
 
 ### Changed
 
-- Classes `RequestsStack` and `ResponsesStack` does not extends `Illuminate\Support\Collection`
+- Maximal `illuminate/*` packages version now is `7.*`
+- Classes `RequestsStack` and `ResponsesStack` do not extend `Illuminate\Support\Collection`
+- Interfaces `RequestsStackInterface` and `ResponsesStackInterface` do not extend `Illuminate\Contracts\Support\Arrayable`
 - Method `push()` in `RequestsStack` and `ResponsesStack` return `void` now
 
+### Added
+
+- Methods `all()`, `getIterator()`, `count()`, `isEmpty()`, `isNotEmpty()` and `first()` implementation in `RequestsStack` and `ResponsesStack` classes
+- Type-hints for methods in `RequestsStackInterface` and `ResponsesStackInterface` interfaces
 
 ## v1.2.0
 
