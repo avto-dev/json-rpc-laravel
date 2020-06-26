@@ -16,7 +16,7 @@ class ResponsesStack extends Collection implements ResponsesStackInterface
     /**
      * ResponsesStack constructor.
      *
-     * @param bool                $is_batch
+     * @param bool                     $is_batch
      * @param array<ResponseInterface> $responses
      */
     public function __construct(bool $is_batch, array $responses = [])
