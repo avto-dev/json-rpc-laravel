@@ -19,7 +19,7 @@ interface ResponsesStackInterface extends Countable, Arrayable, IteratorAggregat
      *
      * @param ResponseInterface $response
      *
-     * @return $this<ResponseInterface>
+     * @return ResponsesStackInterface<ResponseInterface>
      */
     public function push($response);
 
@@ -31,7 +31,7 @@ interface ResponsesStackInterface extends Countable, Arrayable, IteratorAggregat
     public function first();
 
     /**
-     * @return ResponseInterface[]
+     * @return array<ResponseInterface>
      */
     public function all();
 

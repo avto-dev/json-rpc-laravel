@@ -42,7 +42,7 @@ interface RouterInterface
     /**
      * Get registered method names.
      *
-     * @return string[]
+     * @return array<string>
      */
     public function methods(): array;
 }
