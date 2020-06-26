@@ -92,7 +92,6 @@ class ResponsesStackTest extends AbstractTestCase
         $this->assertFalse((new ResponsesStack(false))->isBatch());
     }
 
-
     /**
      * @return void
      */
