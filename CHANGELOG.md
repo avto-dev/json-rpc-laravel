@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog][keepachangelog] and this project adheres to [Semantic Versioning][semver].
 
+## v2.0.0
+
+### Changed
+
+- Classes `RequestsStack` and `ResponsesStack` does not extends `Illuminate\Support\Collection`
+- Method `push()` in `RequestsStack` and `ResponsesStack` return `void` now
+
+
 ## v1.2.0
 
 ### Changed
