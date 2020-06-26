@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace AvtoDev\JsonRpc\Tests\Http\Controllers;
 
@@ -11,7 +11,6 @@ use Illuminate\Support\Str;
 use AvtoDev\JsonRpc\KernelInterface;
 use AvtoDev\JsonRpc\Router\RouterInterface;
 use AvtoDev\JsonRpc\Tests\AbstractTestCase;
-use Illuminate\Foundation\Testing\TestResponse;
 use AvtoDev\JsonRpc\Http\Controllers\RpcController;
 use Illuminate\Contracts\Routing\Registrar as HttpRegistrar;
 
@@ -146,13 +145,13 @@ class RpcControllerTest extends AbstractTestCase
     }
 
     /**
-     * @param TestResponse $response
-     * @param string       $path
-     * @param              $expect
+     * @param \Illuminate\Foundation\Testing\TestResponse|\Illuminate\Testing\TestResponse $response
+     * @param string                                                                       $path
+     * @param                                                                              $expect
      *
      * @return void
      */
-    private function assertJsonPath(TestResponse $response, string $path, $expect): void
+    private function assertJsonPath($response, string $path, $expect): void
     {
         $this->assertSame($expect, Arr::get($response->decodeResponseJson(), $path));
     }

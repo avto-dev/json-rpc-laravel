@@ -16,7 +16,8 @@ class InternalErrorTest extends AbstractErrorTestCase
      */
     public function testDefaultMessage(): void
     {
-        $this->assertSame('Internal error', $this->errorFactory(null)->getMessage());
+        $this->assertSame('Internal error', ($error = $this->errorFactory(null))->getMessage());
+        $this->assertInstanceOf(InternalError::class, $error);
     }
 
     /**

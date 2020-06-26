@@ -5,23 +5,20 @@ namespace AvtoDev\JsonRpc\Requests;
 use Countable;
 use LogicException;
 use IteratorAggregate;
-use Illuminate\Contracts\Support\Arrayable;
 
 /**
- * @see RequestsStack
+ * @see     RequestsStack
  *
  * @extends IteratorAggregate<ErroredRequestInterface|RequestInterface>
  */
-interface RequestsStackInterface extends Countable, Arrayable, IteratorAggregate
+interface RequestsStackInterface extends Countable, IteratorAggregate
 {
     /**
      * Push request into stack.
      *
      * @param ErroredRequestInterface|RequestInterface $request
-     *
-     * @return mixed
      */
-    public function push($request);
+    public function push($request): void;
 
     /**
      * @throws LogicException
@@ -33,7 +30,7 @@ interface RequestsStackInterface extends Countable, Arrayable, IteratorAggregate
     /**
      * @return array<mixed>
      */
-    public function all();
+    public function all(): array;
 
     /**
      * Is batch response?

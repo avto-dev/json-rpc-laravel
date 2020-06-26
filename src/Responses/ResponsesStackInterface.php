@@ -5,35 +5,32 @@ namespace AvtoDev\JsonRpc\Responses;
 use Countable;
 use LogicException;
 use IteratorAggregate;
-use Illuminate\Contracts\Support\Arrayable;
 
 /**
- * @see ResponsesStack
+ * @see     ResponsesStack
  *
  * @extends IteratorAggregate<ResponseInterface>
  */
-interface ResponsesStackInterface extends Countable, Arrayable, IteratorAggregate
+interface ResponsesStackInterface extends Countable, IteratorAggregate
 {
     /**
      * Push response into stack.
      *
      * @param ResponseInterface $response
-     *
-     * @return ResponsesStackInterface<ResponseInterface>
      */
-    public function push($response);
+    public function push($response): void;
 
     /**
      * @throws LogicException
      *
      * @return ResponseInterface
      */
-    public function first();
+    public function first(): ResponseInterface;
 
     /**
      * @return array<ResponseInterface>
      */
-    public function all();
+    public function all(): array;
 
     /**
      * Is batch response?
@@ -43,9 +40,16 @@ interface ResponsesStackInterface extends Countable, Arrayable, IteratorAggregat
     public function isBatch(): bool;
 
     /**
+     * Determine if stack is empty.
+     *
+     * @return bool
+     */
+    public function isEmpty(): bool;
+
+    /**
      * Determine if stack is not empty.
      *
      * @return bool
      */
-    public function isNotEmpty();
+    public function isNotEmpty(): bool;
 }
