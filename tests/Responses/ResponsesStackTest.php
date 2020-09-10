@@ -148,7 +148,7 @@ class ResponsesStackTest extends AbstractTestCase
     public function testFirstThrownAnExceptionWhenStackInEmpty(): void
     {
         $this->expectException(LogicException::class);
-        $this->expectExceptionMessageRegExp('~is empty~');
+        $this->expectExceptionMessageMatches('~is empty~');
 
         $this->instance->first();
     }

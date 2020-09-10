@@ -274,7 +274,7 @@ class RequestFactoryTest extends AbstractTestCase
     public function testResponseToJsonStringException(): void
     {
         $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessageRegExp('~unsupported.*response~i');
+        $this->expectExceptionMessageMatches('~unsupported.*response~i');
 
         $this->factory->responseToJsonString($this->instanceUnsupportedType());
     }
