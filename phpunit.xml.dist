@@ -16,6 +16,8 @@
             <directory suffix="Test.php">./tests</directory>
         </testsuite>
     </testsuites>
+
+    <!-- deprecated -->
     <filter>
         <whitelist processUncoveredFilesFromWhitelist="true">
             <directory suffix=".php">./src</directory>
@@ -33,5 +35,27 @@
     <php>
         <env name="APP_ENV" value="testing"/>
         <env name="APP_DEBUG" value="true"/>
+    </php>
+    <!-- /deprecated -->
+
+    <coverage includeUncoveredFiles="false" processUncoveredFiles="true">
+        <include>
+            <directory suffix=".php">./src</directory>
+        </include>
+        <exclude>
+            <directory>./vendor</directory>
+            <directory>./tests</directory>
+        </exclude>
+        <report>
+            <clover outputFile="./coverage/clover.xml"/>
+            <html outputDirectory="./coverage/html"/>
+            <text outputFile="php://stdout" showUncoveredFiles="false"/>
+            <xml outputDirectory="./coverage/xml"/>
+        </report>
+    </coverage>
+
+    <php>
+        <server name="APP_ENV" value="testing" force="true"/>
+        <server name="APP_DEBUG" value="true" force="true"/>
     </php>
 </phpunit>
