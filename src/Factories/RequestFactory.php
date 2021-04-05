@@ -268,11 +268,11 @@ class RequestFactory implements FactoryInterface
      */
     public function successResponseToJsonString(SuccessResponseInterface $response, int $options = 0): string
     {
-        return \json_encode([
+        return (string) \json_encode([
             'jsonrpc' => '2.0',
             'result'  => $response->getResult(),
             'id'      => $response->getId(),
-        ], $options);
+        ], $options | JSON_THROW_ON_ERROR);
     }
 
     /**
