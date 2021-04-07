@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace AvtoDev\JsonRpc\Tests\Factories;
 
 use AvtoDev\JsonRpc\Kernel;
-use Tarampampam\Wrappers\Json;
 use AvtoDev\JsonRpc\Errors\ErrorInterface;
 use AvtoDev\JsonRpc\Router\RouterInterface;
 use AvtoDev\JsonRpc\Tests\AbstractTestCase;
@@ -337,6 +336,6 @@ JSON;
      */
     protected function modifyJson(string $string, callable $callback): string
     {
-        return Json::encode($callback(Json::decode($string)));
+        return \json_encode($callback(\json_decode($string, true)));
     }
 }

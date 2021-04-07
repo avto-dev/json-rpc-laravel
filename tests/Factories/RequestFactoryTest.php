@@ -6,7 +6,6 @@ namespace AvtoDev\JsonRpc\Tests\Factories;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
-use Tarampampam\Wrappers\Json;
 use AvtoDev\JsonRpc\Requests\Request;
 use AvtoDev\JsonRpc\Errors\ParseError;
 use AvtoDev\JsonRpc\Errors\ServerError;
@@ -62,7 +61,7 @@ class RequestFactoryTest extends AbstractTestCase
     {
         $response = new SuccessResponse(Str::random(), Str::random());
 
-        $this->assertJsonStringEqualsJsonString(Json::encode([
+        $this->assertJsonStringEqualsJsonString(\json_encode([
             'jsonrpc' => '2.0',
             'result'  => $response->getResult(),
             'id'      => $response->getId(),
@@ -77,16 +76,16 @@ class RequestFactoryTest extends AbstractTestCase
         $this->assertSame(
             ['jsonrpc', 'result', 'id'],
             \array_keys(
-                Json::decode($this->factory->responsesStackToJsonString(new ResponsesStack(false, [
+                \json_decode($this->factory->responsesStackToJsonString(new ResponsesStack(false, [
                     new SuccessResponse(Str::random(), null),
-                ])))
+                ])), true)
             )
         );
 
-        $responses = Json::decode($this->factory->responsesStackToJsonString(new ResponsesStack(true, [
+        $responses = \json_decode($this->factory->responsesStackToJsonString(new ResponsesStack(true, [
             new SuccessResponse(Str::random(), null),
             new ErrorResponse(Str::random(), new MethodNotFoundError),
-        ])));
+        ])), true);
 
         foreach ($responses as $response) {
             $this->assertArrayHasKey('jsonrpc', $response);
@@ -130,9 +129,9 @@ class RequestFactoryTest extends AbstractTestCase
     public function testErrorResponseToJsonString(): void
     {
         $response = Arr::dot(
-            Json::decode($this->factory->errorResponseToJsonString(
+            \json_decode($this->factory->errorResponseToJsonString(
                 new ErrorResponse(Str::random(), new MethodNotFoundError)
-            ))
+            ), true)
         );
 
         $this->assertSame(
@@ -147,9 +146,9 @@ class RequestFactoryTest extends AbstractTestCase
     public function testErrorResponseToJsonStringWithExceptionRendering(): void
     {
         $response = Arr::dot(
-            Json::decode($this->factory->errorResponseToJsonString(
+            \json_decode($this->factory->errorResponseToJsonString(
                 new ErrorResponse(Str::random(), new MethodNotFoundError(null, 0, new \Exception))
-            ))
+            ), true)
         );
         $this->assertSame(
             [
@@ -197,7 +196,7 @@ class RequestFactoryTest extends AbstractTestCase
         foreach ($map as $error_code => $code) {
             $response = $this->factory->errorResponseToJsonString(new ErrorResponse(null, new $error_code(null)));
 
-            $this->assertSame($code, Json::decode($response)['error']['code'] ?? null);
+            $this->assertSame($code, \json_decode($response, true)['error']['code'] ?? null);
         }
     }
 
@@ -213,7 +212,7 @@ class RequestFactoryTest extends AbstractTestCase
         };
 
         $response = $this->factory->errorResponseToJsonString(new ErrorResponse(null, $error));
-        $this->assertSame(123, Json::decode($response)['error']['code'] ?? null);
+        $this->assertSame(123, \json_decode($response, true)['error']['code'] ?? null);
     }
 
     /**

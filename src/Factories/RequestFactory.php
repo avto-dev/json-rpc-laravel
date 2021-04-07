@@ -6,7 +6,6 @@ namespace AvtoDev\JsonRpc\Factories;
 
 use Throwable;
 use InvalidArgumentException;
-use Tarampampam\Wrappers\Json;
 use AvtoDev\JsonRpc\Requests\Request;
 use AvtoDev\JsonRpc\Errors\ParseError;
 use AvtoDev\JsonRpc\Errors\ServerError;
@@ -24,7 +23,6 @@ use AvtoDev\JsonRpc\Responses\ResponsesStackInterface;
 use AvtoDev\JsonRpc\Responses\SuccessResponseInterface;
 use AvtoDev\JsonRpc\Traits\ValidateNonStrictValuesTrait;
 use Symfony\Component\HttpFoundation\Response as HttpResponse;
-use Tarampampam\Wrappers\Exceptions\JsonEncodeDecodeException;
 
 class RequestFactory implements FactoryInterface
 {
@@ -50,8 +48,8 @@ class RequestFactory implements FactoryInterface
          * <-- {"jsonrpc": "2.0", "error": {"code": -32700, "message": "Parse error"}, "id": null}
          */
         try {
-            $raw_requests = Json::decode($json_string, false, 512, $options);
-        } catch (JsonEncodeDecodeException $e) {
+            $raw_requests = \json_decode($json_string, false, 512, $options | \JSON_THROW_ON_ERROR);
+        } catch (\JsonException $e) {
             throw new ParseError(null, 0, $e, $e);
         }
 
@@ -143,8 +141,6 @@ class RequestFactory implements FactoryInterface
 
     /**
      * {@inheritdoc}
-     *
-     * @throws JsonEncodeDecodeException
      */
     public function errorToHttpResponse(ErrorResponseInterface $error, int $options = 0): HttpResponse
     {
@@ -157,8 +153,6 @@ class RequestFactory implements FactoryInterface
 
     /**
      * {@inheritdoc}
-     *
-     * @throws JsonEncodeDecodeException
      */
     public function errorResponseToJsonString(ErrorResponseInterface $response, int $options = 0): string
     {
@@ -189,13 +183,11 @@ class RequestFactory implements FactoryInterface
             $result['error']['data'] = $data;
         }
 
-        return Json::encode($result, $options);
+        return \json_encode($result, $options | \JSON_THROW_ON_ERROR);
     }
 
     /**
      * {@inheritdoc}
-     *
-     * @throws JsonEncodeDecodeException
      */
     public function responsesToHttpResponse(ResponsesStackInterface $responses, int $options = 0): HttpResponse
     {
@@ -217,8 +209,6 @@ class RequestFactory implements FactoryInterface
 
     /**
      * {@inheritdoc}
-     *
-     * @throws JsonEncodeDecodeException
      */
     public function responsesStackToJsonString(ResponsesStackInterface $stack, int $options = 0): ?string
     {
@@ -240,15 +230,7 @@ class RequestFactory implements FactoryInterface
     }
 
     /**
-     * Convert response to the JSON string.
-     *
-     * @param ResponseInterface $response
-     * @param int               $options
-     *
-     * @throws InvalidArgumentException
-     * @throws JsonEncodeDecodeException
-     *
-     * @return string
+     * {@inheritdoc}
      */
     public function responseToJsonString(ResponseInterface $response, int $options = 0): string
     {
@@ -265,16 +247,14 @@ class RequestFactory implements FactoryInterface
 
     /**
      * {@inheritdoc}
-     *
-     * @throws JsonEncodeDecodeException
      */
     public function successResponseToJsonString(SuccessResponseInterface $response, int $options = 0): string
     {
-        return Json::encode([
+        return (string) \json_encode([
             'jsonrpc' => '2.0',
             'result'  => $response->getResult(),
             'id'      => $response->getId(),
-        ], $options);
+        ], $options | JSON_THROW_ON_ERROR);
     }
 
     /**

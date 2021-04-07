@@ -73,6 +73,8 @@ interface FactoryInterface
      * @param ErrorResponseInterface $error
      * @param int                    $options Json encode options
      *
+     * @throws \JsonException
+     *
      * @return HttpResponse
      */
     public function errorToHttpResponse(ErrorResponseInterface $error, int $options = 0): HttpResponse;
@@ -82,6 +84,8 @@ interface FactoryInterface
      *
      * @param ResponsesStackInterface $responses
      * @param int                     $options
+     *
+     * @throws \JsonException
      *
      * @return HttpResponse
      */
@@ -104,6 +108,8 @@ interface FactoryInterface
      * @param ErrorResponseInterface $response
      * @param int                    $options  Json encode options
      *
+     * @throws \JsonException
+     *
      * @return string
      */
     public function errorResponseToJsonString(ErrorResponseInterface $response, int $options = 0): string;
@@ -124,6 +130,8 @@ interface FactoryInterface
      *
      * @param SuccessResponseInterface $response
      * @param int                      $options  Json encode options
+     *
+     * @throws \JsonException
      *
      * @return string
      */
@@ -157,6 +165,7 @@ interface FactoryInterface
      * @param int                     $options Json encode options
      *
      * @throws InvalidArgumentException If responses has invalid type
+     * @throws \JsonException
      *
      * @return string|null Null if stack in empty
      */
@@ -169,6 +178,7 @@ interface FactoryInterface
      * @param int               $options
      *
      * @throws InvalidArgumentException
+     * @throws \JsonException
      *
      * @return string
      */
