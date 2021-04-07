@@ -8,7 +8,7 @@ The format is based on [Keep a Changelog][keepachangelog] and this project adher
 
 ### Removed
 
-Dependency `tarampampam/wrappers-php` because this package was deprecated and removed
+- Dependency `tarampampam/wrappers-php` because this package was deprecated and removed
 
 ## v2.2.0
 
