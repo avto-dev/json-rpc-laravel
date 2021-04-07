@@ -49,7 +49,7 @@ class RequestFactory implements FactoryInterface
          */
         try {
             $raw_requests = \json_decode($json_string, false, 512, $options | \JSON_THROW_ON_ERROR);
-        } catch (\Exception $e) {
+        } catch (\JsonException $e) {
             throw new ParseError(null, 0, $e, $e);
         }
 
@@ -141,8 +141,6 @@ class RequestFactory implements FactoryInterface
 
     /**
      * {@inheritdoc}
-     *
-     * @throws \Exception
      */
     public function errorToHttpResponse(ErrorResponseInterface $error, int $options = 0): HttpResponse
     {
@@ -155,8 +153,6 @@ class RequestFactory implements FactoryInterface
 
     /**
      * {@inheritdoc}
-     *
-     * @throws \Exception
      */
     public function errorResponseToJsonString(ErrorResponseInterface $response, int $options = 0): string
     {
@@ -192,8 +188,6 @@ class RequestFactory implements FactoryInterface
 
     /**
      * {@inheritdoc}
-     *
-     * @throws \Exception
      */
     public function responsesToHttpResponse(ResponsesStackInterface $responses, int $options = 0): HttpResponse
     {
@@ -215,8 +209,6 @@ class RequestFactory implements FactoryInterface
 
     /**
      * {@inheritdoc}
-     *
-     * @throws \Exception
      */
     public function responsesStackToJsonString(ResponsesStackInterface $stack, int $options = 0): ?string
     {
@@ -238,15 +230,7 @@ class RequestFactory implements FactoryInterface
     }
 
     /**
-     * Convert response to the JSON string.
-     *
-     * @param ResponseInterface $response
-     * @param int               $options
-     *
-     * @throws InvalidArgumentException
-     * @throws \Exception
-     *
-     * @return string
+     * {@inheritdoc}
      */
     public function responseToJsonString(ResponseInterface $response, int $options = 0): string
     {
@@ -263,8 +247,6 @@ class RequestFactory implements FactoryInterface
 
     /**
      * {@inheritdoc}
-     *
-     * @throws \Exception
      */
     public function successResponseToJsonString(SuccessResponseInterface $response, int $options = 0): string
     {
