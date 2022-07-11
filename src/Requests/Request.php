@@ -81,6 +81,10 @@ class Request implements RequestInterface
      */
     public function getParameterByPath(string $path, $default = null, string $delimiter = '.')
     {
+        if ($delimiter === '') {
+            $delimiter = '.';
+        }
+
         return \array_reduce((array) \explode($delimiter, $path), static function ($carry, $item) use (&$default) {
             return \is_numeric($item) || \is_array($carry)
                 ? ($carry[$item] ?? $default)
