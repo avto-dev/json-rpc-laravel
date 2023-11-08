@@ -15,7 +15,7 @@ use AvtoDev\JsonRpc\Http\Controllers\RpcController;
 use Illuminate\Contracts\Routing\Registrar as HttpRegistrar;
 
 /**
- * @covers \AvtoDev\JsonRpc\Http\Controllers\RpcController<extended>
+ * @covers \AvtoDev\JsonRpc\Http\Controllers\RpcController
  */
 class RpcControllerTest extends AbstractTestCase
 {
@@ -145,7 +145,7 @@ class RpcControllerTest extends AbstractTestCase
     }
 
     /**
-     * @param \Illuminate\Foundation\Testing\TestResponse|\Illuminate\Testing\TestResponse $response
+     * @param \Illuminate\Testing\TestResponse $response
      * @param string                                                                       $path
      * @param                                                                              $expect
      *

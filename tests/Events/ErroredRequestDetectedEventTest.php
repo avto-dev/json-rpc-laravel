@@ -11,7 +11,7 @@ use AvtoDev\JsonRpc\Errors\InvalidParamsError;
 use AvtoDev\JsonRpc\Events\ErroredRequestDetectedEvent;
 
 /**
- * @covers \AvtoDev\JsonRpc\Events\ErroredRequestDetectedEvent<extended>
+ * @covers \AvtoDev\JsonRpc\Events\ErroredRequestDetectedEvent
  */
 class ErroredRequestDetectedEventTest extends AbstractTestCase
 {

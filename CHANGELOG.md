@@ -4,6 +4,25 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog][keepachangelog] and this project adheres to [Semantic Versioning][semver].
 
+## Unreleased
+
+### Added
+
+- Support Laravel `10.x`
+- Support PHPUnit `v10`
+
+### Changed
+
+- Minimal require PHP version now is `8.0.2`
+- Minimal Laravel version now is `9.1.0`
+- Composer version up to `2.6.5`
+- Package `phpstan/phpstan` up to `^1.10`
+- Package `mockery/mockery` up to `^1.6`
+
+### Removed
+
+- Support PHP `7.*` versions
+
 ## v2.4.0
 
 ### Added

@@ -10,7 +10,7 @@ use AvtoDev\JsonRpc\Tests\AbstractTestCase;
 use AvtoDev\JsonRpc\Events\RequestHandledEvent;
 
 /**
- * @covers \AvtoDev\JsonRpc\Events\RequestHandledEvent<extended>
+ * @covers \AvtoDev\JsonRpc\Events\RequestHandledEvent
  */
 class RequestHandledEventTest extends AbstractTestCase
 {

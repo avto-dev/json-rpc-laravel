@@ -7,7 +7,7 @@ namespace AvtoDev\JsonRpc\Tests\Errors;
 use AvtoDev\JsonRpc\Errors\MethodNotFoundError;
 
 /**
- * @covers \AvtoDev\JsonRpc\Errors\MethodNotFoundError<extended>
+ * @covers \AvtoDev\JsonRpc\Errors\MethodNotFoundError
  */
 class MethodNotFoundErrorTest extends AbstractErrorTestCase
 {

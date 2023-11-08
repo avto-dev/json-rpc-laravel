@@ -21,15 +21,15 @@ class SuccessResponse implements SuccessResponseInterface
     /**
      * Response result data.
      *
-     * @var array<mixed>|bool|float|int|object|string
+     * @var array<array-key, mixed>|bool|float|int|mixed|object|string|null
      */
     protected $result;
 
     /**
      * SuccessResponse constructor.
      *
-     * @param int|string|null                               $id     Response identifier
-     * @param array|bool|float|int|mixed|object|string|null $result Response result data
+     * @param int|string|null                                                 $id     Response identifier
+     * @param array<array-key, mixed>|bool|float|int|mixed|object|string|null $result Response result data
      *
      * @throws InvalidArgumentException If passed not valid arguments
      */

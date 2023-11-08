@@ -13,7 +13,7 @@ use AvtoDev\JsonRpc\Errors\InvalidRequestError;
 use AvtoDev\JsonRpc\Requests\ErroredRequestInterface;
 
 /**
- * @covers \AvtoDev\JsonRpc\Requests\ErroredRequest<extended>
+ * @covers \AvtoDev\JsonRpc\Requests\ErroredRequest
  */
 class ErroredRequestTest extends AbstractTestCase
 {

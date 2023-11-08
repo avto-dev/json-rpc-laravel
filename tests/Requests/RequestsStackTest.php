@@ -14,7 +14,7 @@ use AvtoDev\JsonRpc\Errors\MethodNotFoundError;
 use AvtoDev\JsonRpc\Requests\RequestsStackInterface;
 
 /**
- * @covers \AvtoDev\JsonRpc\Requests\RequestsStack<extended>
+ * @covers \AvtoDev\JsonRpc\Requests\RequestsStack
  */
 class RequestsStackTest extends AbstractTestCase
 {

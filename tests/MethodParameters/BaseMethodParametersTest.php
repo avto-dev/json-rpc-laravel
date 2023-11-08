@@ -8,7 +8,7 @@ use AvtoDev\JsonRpc\Tests\AbstractTestCase;
 use AvtoDev\JsonRpc\MethodParameters\BaseMethodParameters;
 
 /**
- * @covers \AvtoDev\JsonRpc\MethodParameters\BaseMethodParameters<extended>
+ * @covers \AvtoDev\JsonRpc\MethodParameters\BaseMethodParameters
  */
 class BaseMethodParametersTest extends AbstractTestCase
 {

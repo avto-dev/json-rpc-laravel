@@ -11,7 +11,7 @@ use AvtoDev\JsonRpc\Responses\SuccessResponse;
 use AvtoDev\JsonRpc\Responses\SuccessResponseInterface;
 
 /**
- * @covers \AvtoDev\JsonRpc\Responses\SuccessResponse<extended>
+ * @covers \AvtoDev\JsonRpc\Responses\SuccessResponse
  */
 class SuccessResponseTest extends AbstractTestCase
 {

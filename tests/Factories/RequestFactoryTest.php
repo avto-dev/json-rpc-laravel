@@ -25,7 +25,7 @@ use AvtoDev\JsonRpc\Responses\ResponseInterface;
 use Symfony\Component\HttpFoundation\Response as HttpResponse;
 
 /**
- * @covers \AvtoDev\JsonRpc\Factories\RequestFactory<extended>
+ * @covers \AvtoDev\JsonRpc\Factories\RequestFactory
  */
 class RequestFactoryTest extends AbstractTestCase
 {
@@ -226,7 +226,7 @@ class RequestFactoryTest extends AbstractTestCase
     }
 
     /**
-     * @return dump(123);void
+     * @return void
      */
     public function testJsonStringToRequestsStackThrowErrorOnEmptyArray(): void
     {

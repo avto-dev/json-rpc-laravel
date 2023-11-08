@@ -8,7 +8,7 @@ use AvtoDev\JsonRpc\RpcRouter;
 use AvtoDev\JsonRpc\Router\RouterInterface;
 
 /**
- * @covers \AvtoDev\JsonRpc\RpcRouter<extended>
+ * @covers \AvtoDev\JsonRpc\RpcRouter
  */
 class RpcRouterTest extends AbstractTestCase
 {

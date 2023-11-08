@@ -10,7 +10,7 @@ use AvtoDev\JsonRpc\Tests\AbstractTestCase;
 use AvtoDev\JsonRpc\Traits\ValidateNonStrictValuesTrait;
 
 /**
- * @covers \AvtoDev\JsonRpc\Traits\ValidateNonStrictValuesTrait<extended>
+ * @covers \AvtoDev\JsonRpc\Traits\ValidateNonStrictValuesTrait
  */
 class ValidateNonStrictValuesTraitTest extends AbstractTestCase
 {

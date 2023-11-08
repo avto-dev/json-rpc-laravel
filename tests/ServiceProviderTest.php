@@ -12,7 +12,7 @@ use AvtoDev\JsonRpc\Factories\RequestFactory;
 use AvtoDev\JsonRpc\Factories\FactoryInterface;
 
 /**
- * @covers \AvtoDev\JsonRpc\ServiceProvider<extended>
+ * @covers \AvtoDev\JsonRpc\ServiceProvider
  */
 class ServiceProviderTest extends AbstractTestCase
 {

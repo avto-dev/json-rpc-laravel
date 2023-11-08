@@ -11,13 +11,14 @@ use AvtoDev\JsonRpc\Router\Router;
 use AvtoDev\JsonRpc\Requests\Request;
 use AvtoDev\JsonRpc\Router\RouterInterface;
 use AvtoDev\JsonRpc\Tests\AbstractTestCase;
+use AvtoDev\JsonRpc\Tests\Stubs\RouterStub;
 use Illuminate\Contracts\Foundation\Application;
 use AvtoDev\JsonRpc\MethodParameters\BaseMethodParameters;
 use AvtoDev\JsonRpc\Requests\RequestInterface as RPCRequest;
 
 /**
  * @group  router
- * @covers \AvtoDev\JsonRpc\Router\Router<extended>
+ * @covers \AvtoDev\JsonRpc\Router\Router
  */
 class RouterTest extends AbstractTestCase
 {
@@ -53,11 +54,11 @@ class RouterTest extends AbstractTestCase
             'foo'  => function (): bool {
                 return true;
             },
-            'bar'  => static::class . '@someAction',
+            'bar'  => RouterStub::class . '@someAction',
             'baz'  => \Closure::fromCallable(function (): int {
                 return 123;
             }),
-            'blah' => [$this, 'someAction'],
+            'blah' => [new RouterStub(), 'someAction'],
         ];
 
         foreach ($actions as $name => $action) {
@@ -104,11 +105,11 @@ class RouterTest extends AbstractTestCase
             'foo'  => static function (): bool {
                 return true;
             },
-            'bar'  => static::class . '@someAction',
+            'bar'  => RouterStub::class . '@someAction',
             'baz'  => \Closure::fromCallable(function (): int {
                 return 123;
             }),
-            'blah' => [$this, 'someAction'],
+            'blah' => [new RouterStub(), 'someAction'],
         ];
 
         foreach ($actions as $name => $action) {
@@ -169,17 +170,5 @@ class RouterTest extends AbstractTestCase
         $this->expectException(InvalidArgumentException::class);
 
         $this->router->call('foo');
-    }
-
-    /**
-     * Required for actions testing.
-     *
-     * @param Application $app
-     *
-     * @return Application
-     */
-    public function someAction(Application $app): Application
-    {
-        return $app;
     }
 }
