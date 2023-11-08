@@ -12,7 +12,7 @@ use AvtoDev\JsonRpc\Errors\MethodNotFoundError;
 use AvtoDev\JsonRpc\Responses\ErrorResponseInterface;
 
 /**
- * @covers \AvtoDev\JsonRpc\Responses\ErrorResponse<extended>
+ * @covers \AvtoDev\JsonRpc\Responses\ErrorResponse
  */
 class ErrorResponseTest extends AbstractTestCase
 {

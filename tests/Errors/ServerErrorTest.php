@@ -7,7 +7,7 @@ namespace AvtoDev\JsonRpc\Tests\Errors;
 use AvtoDev\JsonRpc\Errors\ServerError;
 
 /**
- * @covers \AvtoDev\JsonRpc\Errors\ServerError<extended>
+ * @covers \AvtoDev\JsonRpc\Errors\ServerError
  */
 class ServerErrorTest extends AbstractErrorTestCase
 {

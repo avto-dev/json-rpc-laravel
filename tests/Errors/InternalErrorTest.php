@@ -7,7 +7,7 @@ namespace AvtoDev\JsonRpc\Tests\Errors;
 use AvtoDev\JsonRpc\Errors\InternalError;
 
 /**
- * @covers \AvtoDev\JsonRpc\Errors\InternalError<extended>
+ * @covers \AvtoDev\JsonRpc\Errors\InternalError
  */
 class InternalErrorTest extends AbstractErrorTestCase
 {

@@ -12,7 +12,7 @@ use AvtoDev\JsonRpc\Tests\AbstractTestCase;
 use AvtoDev\JsonRpc\Requests\RequestInterface;
 
 /**
- * @covers \AvtoDev\JsonRpc\Requests\Request<extended>
+ * @covers \AvtoDev\JsonRpc\Requests\Request
  */
 class RequestTest extends AbstractTestCase
 {

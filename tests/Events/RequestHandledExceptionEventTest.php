@@ -11,7 +11,7 @@ use AvtoDev\JsonRpc\Tests\AbstractTestCase;
 use AvtoDev\JsonRpc\Events\RequestHandledExceptionEvent;
 
 /**
- * @covers \AvtoDev\JsonRpc\Events\RequestHandledExceptionEvent<extended>
+ * @covers \AvtoDev\JsonRpc\Events\RequestHandledExceptionEvent
  */
 class RequestHandledExceptionEventTest extends AbstractTestCase
 {

@@ -7,7 +7,7 @@ namespace AvtoDev\JsonRpc\Tests\Errors;
 use AvtoDev\JsonRpc\Errors\ParseError;
 
 /**
- * @covers \AvtoDev\JsonRpc\Errors\ParseError<extended>
+ * @covers \AvtoDev\JsonRpc\Errors\ParseError
  */
 class ParseErrorTest extends AbstractErrorTestCase
 {

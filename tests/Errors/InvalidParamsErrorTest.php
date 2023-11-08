@@ -7,7 +7,7 @@ namespace AvtoDev\JsonRpc\Tests\Errors;
 use AvtoDev\JsonRpc\Errors\InvalidParamsError;
 
 /**
- * @covers \AvtoDev\JsonRpc\Errors\InvalidParamsError<extended>
+ * @covers \AvtoDev\JsonRpc\Errors\InvalidParamsError
  */
 class InvalidParamsErrorTest extends AbstractErrorTestCase
 {

@@ -7,7 +7,7 @@ namespace AvtoDev\JsonRpc\Tests\Errors;
 use AvtoDev\JsonRpc\Errors\InvalidRequestError;
 
 /**
- * @covers \AvtoDev\JsonRpc\Errors\InvalidRequestError<extended>
+ * @covers \AvtoDev\JsonRpc\Errors\InvalidRequestError
  */
 class InvalidRequestErrorTest extends AbstractErrorTestCase
 {

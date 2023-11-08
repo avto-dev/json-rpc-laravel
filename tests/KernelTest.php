@@ -10,6 +10,7 @@ use AvtoDev\JsonRpc\Kernel;
 use Illuminate\Support\Str;
 use AvtoDev\JsonRpc\KernelInterface;
 use AvtoDev\JsonRpc\Requests\Request;
+use Illuminate\Support\Facades\Event;
 use AvtoDev\JsonRpc\Errors\ServerError;
 use AvtoDev\JsonRpc\Errors\InternalError;
 use AvtoDev\JsonRpc\Requests\RequestsStack;
@@ -24,7 +25,7 @@ use AvtoDev\JsonRpc\Events\RequestHandledExceptionEvent;
 use AvtoDev\JsonRpc\Tests\Stubs\BaseMethodParametersStub;
 
 /**
- * @covers \AvtoDev\JsonRpc\Kernel<extended>
+ * @covers \AvtoDev\JsonRpc\Kernel
  */
 class KernelTest extends AbstractTestCase
 {
@@ -61,11 +62,7 @@ class KernelTest extends AbstractTestCase
      */
     public function testHandleWithEmpty(): void
     {
-        $this->doesntExpectEvents([
-            ErroredRequestDetectedEvent::class,
-            RequestHandledEvent::class,
-            RequestHandledExceptionEvent::class,
-        ]);
+        Event::fake();
 
         $this->setUpProperties();
 
@@ -74,6 +71,10 @@ class KernelTest extends AbstractTestCase
 
         $this->assertEmpty($responses = $this->kernel->handle(new RequestsStack(false)));
         $this->assertFalse($responses->isBatch());
+
+        Event::assertNotDispatched(ErroredRequestDetectedEvent::class);
+        Event::assertNotDispatched(RequestHandledEvent::class);
+        Event::assertNotDispatched(RequestHandledExceptionEvent::class);
     }
 
     /**
@@ -83,15 +84,7 @@ class KernelTest extends AbstractTestCase
      */
     public function testHandleNotifications(): void
     {
-        $this->doesntExpectEvents([
-            ErroredRequestDetectedEvent::class,
-            RequestHandledExceptionEvent::class,
-
-        ]);
-
-        $this->expectsEvents([
-            RequestHandledEvent::class,
-        ]);
+        Event::fake();
 
         $this->setUpProperties();
 
@@ -111,6 +104,11 @@ class KernelTest extends AbstractTestCase
 
         $this->assertCount(1, $responses);
         $this->assertSame($id, $responses->first()->getId());
+
+        Event::assertNotDispatched(ErroredRequestDetectedEvent::class);
+        Event::assertNotDispatched(RequestHandledExceptionEvent::class);
+
+        Event::assertDispatched(RequestHandledEvent::class);
     }
 
     /**
@@ -120,15 +118,7 @@ class KernelTest extends AbstractTestCase
      */
     public function testHandleErroredRequests(): void
     {
-        $this->doesntExpectEvents([
-            RequestHandledExceptionEvent::class,
-
-        ]);
-
-        $this->expectsEvents([
-            ErroredRequestDetectedEvent::class,
-            RequestHandledEvent::class,
-        ]);
+        Event::fake();
 
         $this->setUpProperties();
 
@@ -154,6 +144,11 @@ class KernelTest extends AbstractTestCase
         $this->assertSame($id2, $second->getId());
         $this->assertInstanceOf(SuccessResponse::class, $second);
         $this->assertTrue($second->getResult());
+
+        Event::assertNotDispatched(RequestHandledExceptionEvent::class);
+
+        Event::assertDispatched(ErroredRequestDetectedEvent::class);
+        Event::assertDispatched(RequestHandledEvent::class);
     }
 
     /**
@@ -163,14 +158,7 @@ class KernelTest extends AbstractTestCase
      */
     public function testHandleNonExistsMethod(): void
     {
-        $this->doesntExpectEvents([
-            RequestHandledExceptionEvent::class,
-            RequestHandledEvent::class,
-            ErroredRequestDetectedEvent::class,
-
-        ]);
-
-        $this->expectsEvents([]);
+        Event::fake();
 
         $this->setUpProperties();
 
@@ -185,6 +173,8 @@ class KernelTest extends AbstractTestCase
         $first = $responses->all()[0];
         $this->assertInstanceOf(ErrorResponse::class, $first);
         $this->assertInstanceOf(MethodNotFoundError::class, $first->getError());
+
+        Event::assertNothingDispatched();
     }
 
     /**
@@ -194,14 +184,7 @@ class KernelTest extends AbstractTestCase
      */
     public function testHandleMethodThrowAnException(): void
     {
-        $this->doesntExpectEvents([
-            RequestHandledEvent::class,
-            ErroredRequestDetectedEvent::class,
-        ]);
-
-        $this->expectsEvents([
-            RequestHandledExceptionEvent::class,
-        ]);
+        Event::fake();
 
         $this->setUpProperties();
 
@@ -220,6 +203,11 @@ class KernelTest extends AbstractTestCase
         $first = $responses->all()[0];
         $this->assertInstanceOf(ErrorResponse::class, $first);
         $this->assertInstanceOf(InternalError::class, $first->getError());
+
+        Event::assertNotDispatched(RequestHandledEvent::class);
+        Event::assertNotDispatched(ErroredRequestDetectedEvent::class);
+
+        Event::assertDispatched(RequestHandledExceptionEvent::class);
     }
 
     /**
@@ -229,14 +217,7 @@ class KernelTest extends AbstractTestCase
      */
     public function testBatchCall(): void
     {
-        $this->doesntExpectEvents([
-            RequestHandledExceptionEvent::class,
-            ErroredRequestDetectedEvent::class,
-        ]);
-
-        $this->expectsEvents([
-            RequestHandledEvent::class,
-        ]);
+        Event::fake();
 
         $this->setUpProperties();
 
@@ -264,6 +245,11 @@ class KernelTest extends AbstractTestCase
         $last = $responses->all()[1];
         $this->assertInstanceOf(SuccessResponse::class, $last);
         $this->assertNull($last->getResult());
+
+        Event::assertNotDispatched(RequestHandledExceptionEvent::class);
+        Event::assertNotDispatched(ErroredRequestDetectedEvent::class);
+
+        Event::assertDispatched(RequestHandledEvent::class);
     }
 
     /**
@@ -273,14 +259,7 @@ class KernelTest extends AbstractTestCase
      */
     public function testBatchCall2(): void
     {
-        $this->doesntExpectEvents([
-            RequestHandledEvent::class,
-            ErroredRequestDetectedEvent::class,
-        ]);
-
-        $this->expectsEvents([
-            RequestHandledExceptionEvent::class,
-        ]);
+        Event::fake();
 
         $this->setUpProperties();
 
@@ -304,6 +283,11 @@ class KernelTest extends AbstractTestCase
         $this->assertInstanceOf(ErrorResponse::class, $response);
         $this->assertSame($first_request_id, $response->getId());
         $this->assertSame('foo error', $response->getError()->getMessage());
+
+        Event::assertNotDispatched(RequestHandledEvent::class);
+        Event::assertNotDispatched(ErroredRequestDetectedEvent::class);
+
+        Event::assertDispatched(RequestHandledExceptionEvent::class);
     }
 
     /**
