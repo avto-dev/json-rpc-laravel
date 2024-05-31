@@ -1,33 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.6/phpunit.xsd"
-         bootstrap="./tests/bootstrap.php"
-         colors="true"
-         forceCoversAnnotation="true">
-    <testsuites>
-        <testsuite name="Unit">
-            <directory suffix="Test.php">./tests</directory>
-        </testsuite>
-    </testsuites>
-
-    <coverage includeUncoveredFiles="false" processUncoveredFiles="true">
-        <include>
-            <directory suffix=".php">./src</directory>
-        </include>
-        <exclude>
-            <directory>./vendor</directory>
-            <directory>./tests</directory>
-        </exclude>
-        <report>
-            <clover outputFile="./coverage/clover.xml"/>
-            <html outputDirectory="./coverage/html"/>
-            <text outputFile="php://stdout" showUncoveredFiles="false"/>
-            <xml outputDirectory="./coverage/xml"/>
-        </report>
-    </coverage>
-
-    <php>
-        <server name="APP_ENV" value="testing" force="true"/>
-        <server name="APP_DEBUG" value="true" force="true"/>
-    </php>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/11.1/phpunit.xsd" bootstrap="./tests/bootstrap.php" colors="true" cacheDirectory=".phpunit.cache" requireCoverageMetadata="true">
+  <testsuites>
+    <testsuite name="Unit">
+      <directory suffix="Test.php">./tests</directory>
+    </testsuite>
+  </testsuites>
+  <coverage includeUncoveredFiles="false">
+    <report>
+      <clover outputFile="./coverage/clover.xml"/>
+      <html outputDirectory="./coverage/html"/>
+      <text outputFile="php://stdout" showUncoveredFiles="false"/>
+      <xml outputDirectory="./coverage/xml"/>
+    </report>
+  </coverage>
+  <php>
+    <server name="APP_ENV" value="testing" force="true"/>
+    <server name="APP_DEBUG" value="true" force="true"/>
+  </php>
+  <source>
+    <include>
+      <directory suffix=".php">./src</directory>
+    </include>
+    <exclude>
+      <directory>./vendor</directory>
+      <directory>./tests</directory>
+    </exclude>
+  </source>
 </phpunit>
