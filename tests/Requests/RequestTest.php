@@ -183,6 +183,7 @@ class RequestTest extends AbstractTestCase
         $this->assertSame($bar, $this->request->getParameterByPath('bar', null, $delimiter));
         $this->assertSame($baz_foo, $this->request->getParameterByPath('baz*foo', null, $delimiter));
         $this->assertSame($baz_bar, $this->request->getParameterByPath('baz^bar', null, '^'));
+        $this->assertSame($baz_bar, $this->request->getParameterByPath('baz.bar', null, ''));
         $this->assertSame($baz_bar_foo, $this->request->getParameterByPath('baz%bar%foo', null, '%'));
         $this->assertSame($baz_bar_bar_foo, $this->request->getParameterByPath('baz#bar#bar#foo', null, '#'));
 
